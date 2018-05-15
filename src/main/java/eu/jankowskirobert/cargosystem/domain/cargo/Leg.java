@@ -6,9 +6,9 @@ import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompany;
 import java.time.LocalDateTime;
 
 public class Leg {
-    private LocalDateTime arrival;
-    private LocalDateTime departure;
-    private Location destination;
-    private Location placeOfIssue;
+    private LocalDateTime load;
+    private LocalDateTime unload;
+    private Location loadLocation;
+    private Location unloadLocation;
     private Transit transit;
 }
