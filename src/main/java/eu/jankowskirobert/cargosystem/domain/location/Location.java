@@ -13,7 +13,9 @@ import lombok.Getter;
 @Getter
 @Builder
 public class Location {
+	private LocationId id;
 	private Address address;
 	private CompanyId companyId;
 	private LocalDate availability;
+	
 }

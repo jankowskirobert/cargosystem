@@ -11,7 +11,6 @@ import lombok.Getter;
 public class TransportCompany {
 	private TransportCompanyId id;
 	private String name;
-	private TransportCompanyStatus status;
 	private Address companyLocationAddress;
 	
 }

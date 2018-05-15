@@ -15,7 +15,7 @@ public class LocationHttpApi {
 	
 	@PostMapping(path = "/new")
 	public void addNewLocation(final NewLocationCommand newLocationCommand) {
-		commandHandler.execute(newLocationCommand);
+		commandHandler.asyncExecutor(newLocationCommand);
 	}
 	
 }
