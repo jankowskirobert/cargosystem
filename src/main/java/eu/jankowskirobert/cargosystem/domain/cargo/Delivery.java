@@ -27,12 +27,36 @@ public class Delivery {
 
     public Delivery(HandlingEvent event, RouteSpecification routeSpecification, Itinerary itinerary){
         this.deliveryStatus = this.matchDeliveryStatus(event);
+        this.lastLocation = this.dispatchLocationFromEvent(event);
+        this.current = this.dispatchTransitFromEvent(event);
+        this.estimatedTimeOfArrival = this.estimate(itinerary);
+    }
+
+    private LocalDateTime estimate(Itinerary itinerary) {
+        return itinerary.getFinalArrival();
+    }
+
+    private Transit dispatchTransitFromEvent(HandlingEvent event) {
+        return event.transit();
+    }
+
+    private Location dispatchLocationFromEvent(HandlingEvent event) {
+        return event.location();
     }
 
     private DeliveryStatus matchDeliveryStatus(HandlingEvent event) {
         if(!Objects.isNull(event)){
             switch (event.type()){
-
+                case LOAD:
+                    return DeliveryStatus.ON_THE_WAY;
+                case UNLOAD:
+                    return DeliveryStatus.IN_MAGAZINE;
+                case RECEIVE:
+                    return DeliveryStatus.TRANSFERED;
+                case CLAIM:
+                    return DeliveryStatus.WAITING;
+                default:
+                    return DeliveryStatus.UNKNOWN;
             }
         }
         return DeliveryStatus.UNKNOWN;
