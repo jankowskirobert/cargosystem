@@ -8,7 +8,9 @@ import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-
+/*
+    current cargo state
+ */
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Accessors(fluent = true)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -17,7 +19,7 @@ public class Delivery {
     private Location lastLocation;
     private Transit current;
     private LocalDateTime estimatedTimeOfArrival;
-    private HandlingActivity handlingActivity;
+    private HandlingActivity nextActivity;
     private RoutingStatus routingStatus;
     private HandlingEvent handlingEvent;
 
@@ -26,39 +28,36 @@ public class Delivery {
     }
 
     public Delivery(HandlingEvent event, RouteSpecification routeSpecification, Itinerary itinerary){
-        this.deliveryStatus = this.matchDeliveryStatus(event);
-        this.lastLocation = this.dispatchLocationFromEvent(event);
-        this.current = this.dispatchTransitFromEvent(event);
+        this.deliveryStatus = this.matchDeliveryStatus(event.activity());
+        this.lastLocation = this.dispatchLocationFromEvent(event.activity());
+        this.current = this.dispatchTransitFromEvent(event.activity());
         this.estimatedTimeOfArrival = this.estimate(itinerary);
+        this.nextActivity = this.predictNextEvent(event.activity(), routeSpecification, itinerary);
+    }
+
+    private HandlingActivity predictNextEvent(HandlingActivity activity, RouteSpecification routeSpecification, Itinerary itinerary) {
+        switch(activity.type()){
+            case LOAD:
+            {
+
+            }
+        }
+        return null;
     }
 
     private LocalDateTime estimate(Itinerary itinerary) {
         return itinerary.getFinalArrival();
     }
 
-    private Transit dispatchTransitFromEvent(HandlingEvent event) {
-        return event.transit();
+    private Transit dispatchTransitFromEvent(HandlingActivity activity) {
+        return activity.transit();
     }
 
-    private Location dispatchLocationFromEvent(HandlingEvent event) {
-        return event.location();
+    private Location dispatchLocationFromEvent(HandlingActivity activity) {
+        return activity.location();
     }
 
-    private DeliveryStatus matchDeliveryStatus(HandlingEvent event) {
-        if(!Objects.isNull(event)){
-            switch (event.type()){
-                case LOAD:
-                    return DeliveryStatus.ON_THE_WAY;
-                case UNLOAD:
-                    return DeliveryStatus.IN_MAGAZINE;
-                case RECEIVE:
-                    return DeliveryStatus.TRANSFERED;
-                case CLAIM:
-                    return DeliveryStatus.WAITING;
-                default:
-                    return DeliveryStatus.UNKNOWN;
-            }
-        }
-        return DeliveryStatus.UNKNOWN;
+    private DeliveryStatus matchDeliveryStatus(HandlingActivity activity) {
+        return activity.type().obtain();
     }
 }

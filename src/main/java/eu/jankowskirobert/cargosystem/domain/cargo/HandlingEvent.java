@@ -14,9 +14,7 @@ import java.time.LocalDateTime;
 //@AllArgsConstructor(staticName = "of")
 @Getter
 public class HandlingEvent {
-    private HandlingEventType type;
-    private Transit transit;
-    private Location location;
+    private HandlingActivity activity;
     private LocalDateTime eventRegistration;
     private LocalDateTime eventCompetition;
     private CargoId cargoId;
