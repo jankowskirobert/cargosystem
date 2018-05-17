@@ -1,6 +1,7 @@
 package eu.jankowskirobert.cargosystem.domain.cargo;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.experimental.Accessors;
 
 @Accessors(fluent = true)

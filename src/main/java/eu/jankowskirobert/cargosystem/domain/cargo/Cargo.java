@@ -14,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Cargo {
 
     private CargoId id;

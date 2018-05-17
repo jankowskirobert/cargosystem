@@ -31,7 +31,7 @@ public class HandlerTest {
 			
 			@Override
 			public Company find(CompanyId companyId) {
-				return Company.of(companyId);
+				return Company.of(companyId, null);
 			}
 		};
 		newLocationCommandHandler = new NewLocationCommandHandler(locationRepository, companyRepository);

@@ -2,8 +2,6 @@ package eu.jankowskirobert.cargosystem.domain.cargo;
 
 import java.util.UUID;
 
-import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompanyId;
-import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompanyId.TransportCompanyIdBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +12,7 @@ import lombok.Getter;
 public class CargoId {
 	private String id;
 	
-	public static CargoId generate() {
+	public static CargoId random() {
 		return of(UUID.randomUUID().toString());
 	}
 }
