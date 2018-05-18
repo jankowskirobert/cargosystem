@@ -31,7 +31,7 @@ public class Cargo {
         }
     }
 
-    public Cargo of(CargoId id, RouteSpecification routeSpecification, Itinerary itinerary) {
+    public static Cargo of(CargoId id, RouteSpecification routeSpecification, Itinerary itinerary) {
         Delivery delivery = Delivery.of(routeSpecification, itinerary);
         Cargo cargo = new Cargo(id,TransportCompany.empty(), Company.empty(), routeSpecification.origin(), routeSpecification, itinerary,delivery, null );
         return cargo;

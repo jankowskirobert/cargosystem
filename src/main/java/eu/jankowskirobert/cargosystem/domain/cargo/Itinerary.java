@@ -19,6 +19,10 @@ Transa transportu drogowego - cala trasa przejazdu
 public class Itinerary {
     private List<Leg> legs = Collections.emptyList();
 
+    public static Itinerary empty() {
+        return new Itinerary();
+    }
+
     public LocalDateTime getFinalArrival() {
         return legs.get(legs.size() - 1).getUnload();
     }
