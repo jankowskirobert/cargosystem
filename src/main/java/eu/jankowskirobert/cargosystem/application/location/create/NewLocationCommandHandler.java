@@ -2,6 +2,7 @@ package eu.jankowskirobert.cargosystem.application.location.create;
 
 import java.util.Objects;
 
+import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyId;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyRepository;
 import eu.jankowskirobert.cargosystem.domain.location.*;
@@ -23,8 +24,8 @@ public class NewLocationCommandHandler implements CommandHandler<NewLocationComm
     public void handle(NewLocationCommand command) {
         LocationId id = LocationId.of(command.getId());
         CompanyId companyId = CompanyId.of(command.getCompanyId());
-        companyRepository.find(companyId);
-        if (!Objects.isNull(companyId)) {
+        Company company = companyRepository.find(companyId);
+        if (!Objects.isNull(company)) {
             Location newLocation = Location.of(id, command.getAddress(), companyId, command.getAvailability());
             locationRepository.store(newLocation);
         } else {

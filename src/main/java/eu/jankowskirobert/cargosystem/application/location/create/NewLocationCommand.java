@@ -13,7 +13,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(staticName = "of")
 @Builder
 public class NewLocationCommand {
 
