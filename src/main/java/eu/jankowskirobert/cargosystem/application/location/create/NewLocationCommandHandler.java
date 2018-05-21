@@ -29,7 +29,7 @@ public class NewLocationCommandHandler implements CommandHandler<NewLocationComm
             Location newLocation = Location.of(id, command.getAddress(), companyId, command.getAvailability());
             locationRepository.store(newLocation);
         } else {
-            throw new NewLocationCommandHandlerException("Cannot find company identified by: " + companyId);
+            throw new NewLocationCommandHandlerException("Cannot find company identified by: " + companyId.toString());
         }
     }
 

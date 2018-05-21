@@ -31,10 +31,13 @@ public class LocationHandlerTest {
 	@Autowired
 	private CompanyRepository companyRepository;
 	private NewLocationCommandHandler newLocationCommandHandler;
-	
+    private final String companyId = "001";
 	@Before
 	public void setUp() {
 		newLocationCommandHandler = new NewLocationCommandHandler(locationRepository, companyRepository);
+        CompanyId id = CompanyId.of(companyId);
+		Company company = Company.of(id, "BANK");
+		companyRepository.store(company);
 	}
 	
 	@Test
@@ -42,7 +45,6 @@ public class LocationHandlerTest {
 		Address address = Address.of("", "", "", "", "");
         LocalDate now = LocalDate.now();
         String id = "123";
-        String companyId = "001";
         NewLocationCommand command = NewLocationCommand.of(id, address, companyId, now);
 		newLocationCommandHandler.handle(command);
 		Location xxx = Location.of(LocationId.of(id),address, CompanyId.of(companyId), now);
@@ -54,7 +56,6 @@ public class LocationHandlerTest {
         Address address = Address.of("", "", "", "", "");
         LocalDate now = LocalDate.now();
         String id = "123";
-        String companyId = "001";
         NewLocationCommand command = NewLocationCommand.of(id, address, companyId, now);
         newLocationCommandHandler.handle(command);
         newLocationCommandHandler.handle(command);
