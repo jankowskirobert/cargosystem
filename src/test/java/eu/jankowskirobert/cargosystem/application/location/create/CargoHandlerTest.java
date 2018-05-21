@@ -2,6 +2,7 @@ package eu.jankowskirobert.cargosystem.application.location.create;
 
 import eu.jankowskirobert.cargosystem.application.cargo.create.NewCargoCommand;
 import eu.jankowskirobert.cargosystem.application.cargo.create.NewCargoCommandHandler;
+import eu.jankowskirobert.cargosystem.domain.cargo.CargoId;
 import eu.jankowskirobert.cargosystem.domain.cargo.CargoRepository;
 import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyId;
@@ -13,6 +14,7 @@ import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompany;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompanyId;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompanyRepository;
 import eu.jankowskirobert.cargosystem.shared.Address;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,5 +69,6 @@ public class CargoHandlerTest {
         //when
         handler.handle(newCargo);
         //then
+        Assert.assertNotNull(cargoRepository.find(CargoId.of("123")));
     }
 }

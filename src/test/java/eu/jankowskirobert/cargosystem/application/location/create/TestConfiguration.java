@@ -44,6 +44,7 @@ public class TestConfiguration {
     public TransportCompanyRepository transportCompanyRepository() {
         return new TransportCompanyRepository() {
             Set<TransportCompany> transportCompanies = new HashSet<TransportCompany>();
+
             @Override
             public void store(TransportCompany transportCompany) {
                 if (!transportCompanies.add(transportCompany)) throw new TransportCompanyRepositoryException();
@@ -61,6 +62,7 @@ public class TestConfiguration {
         return new CargoRepository() {
 
             Set<Cargo> cargos = new HashSet<>();
+
             @Override
             public void store(Cargo cargo) {
                 if (!cargos.add(cargo)) throw new CargoRepositoryException();
@@ -70,6 +72,11 @@ public class TestConfiguration {
             public CargoId nextCargoId() {
                 return CargoId.of(UUID.randomUUID().toString());
             }
+
+            @Override
+            public Cargo find(CargoId id) {
+                return cargos.stream().filter(x -> x.getId().equals(id)).findFirst().orElse(null);
+            }
         };
     }
 
@@ -77,6 +84,7 @@ public class TestConfiguration {
     public CompanyRepository companyRepository() {
         return new CompanyRepository() {
             Set<Company> companies = new HashSet<>();
+
             @Override
             public Company find(CompanyId companyId) {
                 return companies.stream().filter(x -> x.getCompanyId().equals(companyId)).findFirst().orElse(null);

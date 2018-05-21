@@ -7,13 +7,12 @@ import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.domain.freight.Freight;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompany;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @RequiredArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
+@EqualsAndHashCode(of = "id")
 public class Cargo {
 
     private CargoId id;
@@ -32,7 +31,7 @@ public class Cargo {
     }
 
     public static Cargo of(CargoId id, RouteSpecification routeSpecification, Itinerary itinerary) {
-        Delivery delivery = Delivery.of(routeSpecification, itinerary);
+        Delivery delivery = Delivery.of(null, routeSpecification, itinerary);
         Cargo cargo = new Cargo(id,TransportCompany.empty(), Company.empty(), routeSpecification.origin(), routeSpecification, itinerary,delivery, null );
         return cargo;
     }

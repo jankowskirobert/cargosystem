@@ -11,9 +11,10 @@ import java.time.LocalDateTime;
  * Event that will update main aggregate root node
  */
 @Accessors(fluent = true)
-//@AllArgsConstructor(staticName = "of")
+@AllArgsConstructor(staticName = "of")
 @Getter
 public class HandlingEvent {
+    private HandlingEventId id;
     private HandlingActivity activity;
     private LocalDateTime eventRegistration;
     private LocalDateTime eventCompetition;

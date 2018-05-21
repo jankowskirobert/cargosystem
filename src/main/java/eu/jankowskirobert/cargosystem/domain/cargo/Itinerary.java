@@ -24,7 +24,9 @@ public class Itinerary {
     }
 
     public LocalDateTime getFinalArrival() {
-        return legs.get(legs.size() - 1).getUnload();
+        if(!legs.isEmpty())
+            return legs.get(legs.size() - 1).getUnload();
+        return null;
     }
 
 
