@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Accessors(fluent = true)
 @AllArgsConstructor(staticName = "of")
@@ -16,5 +16,5 @@ public class RouteSpecification {
     @Getter()
     private Location origin;
     private Location destination;
-    private LocalDateTime arrivalDeadline;
+    private LocalDate arrivalDeadline;
 }

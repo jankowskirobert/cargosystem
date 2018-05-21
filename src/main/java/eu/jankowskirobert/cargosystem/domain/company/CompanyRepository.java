@@ -4,4 +4,5 @@ public interface CompanyRepository {
 
 	Company find(CompanyId companyId);
 
+    void store(Company company);
 }

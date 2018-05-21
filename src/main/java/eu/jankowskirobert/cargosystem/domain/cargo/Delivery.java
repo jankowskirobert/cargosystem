@@ -28,6 +28,7 @@ public class Delivery {
     }
 
     public Delivery(HandlingEvent event, RouteSpecification routeSpecification, Itinerary itinerary){
+        this.handlingEvent = event;
         this.deliveryStatus = this.matchDeliveryStatus(event.activity());
         this.lastLocation = this.dispatchLocationFromEvent(event.activity());
         this.current = this.dispatchTransitFromEvent(event.activity());
@@ -42,7 +43,7 @@ public class Delivery {
 
             }
         }
-        return null;
+        return handlingEvent.activity();
     }
 
     private LocalDateTime estimate(Itinerary itinerary) {
