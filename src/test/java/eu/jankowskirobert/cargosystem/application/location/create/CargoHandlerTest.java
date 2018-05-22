@@ -2,8 +2,8 @@ package eu.jankowskirobert.cargosystem.application.location.create;
 
 import eu.jankowskirobert.cargosystem.application.cargo.create.NewCargoCommand;
 import eu.jankowskirobert.cargosystem.application.cargo.create.NewCargoCommandHandler;
-import eu.jankowskirobert.cargosystem.domain.cargo.CargoId;
 import eu.jankowskirobert.cargosystem.domain.cargo.CargoRepository;
+import eu.jankowskirobert.cargosystem.domain.cargo.TransportNumber;
 import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyId;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyRepository;
@@ -19,8 +19,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -69,6 +67,6 @@ public class CargoHandlerTest {
         //when
         handler.handle(newCargo);
         //then
-        Assert.assertNotNull(cargoRepository.find(CargoId.of("123")));
+        Assert.assertNotNull(cargoRepository.findFirst(TransportNumber.of("123")));
     }
 }

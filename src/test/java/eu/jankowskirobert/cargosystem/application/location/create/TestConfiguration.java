@@ -1,9 +1,6 @@
 package eu.jankowskirobert.cargosystem.application.location.create;
 
-import eu.jankowskirobert.cargosystem.domain.cargo.Cargo;
-import eu.jankowskirobert.cargosystem.domain.cargo.CargoId;
-import eu.jankowskirobert.cargosystem.domain.cargo.CargoRepository;
-import eu.jankowskirobert.cargosystem.domain.cargo.CargoRepositoryException;
+import eu.jankowskirobert.cargosystem.domain.cargo.*;
 import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyId;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyRepository;
@@ -21,10 +18,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Configuration
 public class TestConfiguration {
@@ -89,8 +84,13 @@ public class TestConfiguration {
             }
 
             @Override
-            public Cargo find(CargoId id) {
-                return cargos.stream().filter(x -> x.getId().equals(id)).findFirst().orElse(null);
+            public List<Cargo> findAll(TransportNumber id) {
+                return cargos.stream().filter(x -> x.getTransportNumber().equals(id)).collect(Collectors.toList());
+            }
+
+            @Override
+            public Cargo findFirst(TransportNumber id) {
+                return cargos.stream().filter(x -> x.getTransportNumber().equals(id)).findFirst().orElse(null);
             }
         };
     }

@@ -30,10 +30,11 @@ public class NewCargoCommandHandler implements CommandHandler<NewCargoCommand> {
         TransportCompany transportCompany = transportCompanyRepository.find(TransportCompanyId.of(newCargoCommand.getTransportCompanyId()));
         Location locationFrom = locationRepository.find(LocationId.of(newCargoCommand.getLocationIdFrom()));
         Location locationTo = locationRepository.find(LocationId.of(newCargoCommand.getLocationIdTo()));
-        CargoId cargoId = CargoId.of(newCargoCommand.getId());
+        CargoId cargoId = CargoId.random();
+        TransportNumber number = TransportNumber.of(newCargoCommand.getTransportNumber());
         RouteSpecification routeSpecification = RouteSpecification.of(locationFrom, locationTo, newCargoCommand.getArrival());
         Itinerary itinerary = Itinerary.empty();
-        Cargo newCargo = Cargo.of(cargoId, routeSpecification, itinerary);
+        Cargo newCargo = Cargo.of(cargoId, number, routeSpecification, itinerary);
         cargoRepository.store(newCargo);
     }
 }

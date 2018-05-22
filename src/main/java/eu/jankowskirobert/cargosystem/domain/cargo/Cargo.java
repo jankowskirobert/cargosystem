@@ -1,13 +1,12 @@
 package eu.jankowskirobert.cargosystem.domain.cargo;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.domain.freight.Freight;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompany;
 import lombok.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -16,6 +15,7 @@ import lombok.*;
 public class Cargo {
 
     private CargoId id;
+    private TransportNumber transportNumber;
     private TransportCompany transportCompany;
     private Company orderingCompany;
     private Location placeOfIssue;
@@ -30,9 +30,13 @@ public class Cargo {
         }
     }
 
-    public static Cargo of(CargoId id, RouteSpecification routeSpecification, Itinerary itinerary) {
+    public static Cargo of(CargoId id, TransportNumber transportNumber, RouteSpecification routeSpecification, Itinerary itinerary) {
         Delivery delivery = Delivery.of(null, routeSpecification, itinerary);
-        Cargo cargo = new Cargo(id,TransportCompany.empty(), Company.empty(), routeSpecification.origin(), routeSpecification, itinerary,delivery, null );
+        Cargo cargo = new Cargo(id, transportNumber, TransportCompany.empty(), Company.empty(), routeSpecification.origin(), routeSpecification, itinerary, delivery, null);
         return cargo;
+    }
+
+    public boolean withSameNumber(Cargo cargo){
+        return this.transportNumber.equals(cargo.getTransportNumber());
     }
 }
