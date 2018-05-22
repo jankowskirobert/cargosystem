@@ -1,6 +1,9 @@
 package eu.jankowskirobert.cargosystem.application.location.create;
 
-import eu.jankowskirobert.cargosystem.domain.cargo.*;
+import eu.jankowskirobert.cargosystem.domain.cargo.Cargo;
+import eu.jankowskirobert.cargosystem.domain.cargo.CargoId;
+import eu.jankowskirobert.cargosystem.domain.cargo.CargoRepository;
+import eu.jankowskirobert.cargosystem.domain.cargo.CargoRepositoryException;
 import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyId;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyRepository;
@@ -13,9 +16,12 @@ import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompany;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompanyId;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompanyRepository;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompanyRepositoryException;
+import eu.jankowskirobert.cargosystem.shared.Address;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -25,8 +31,17 @@ public class TestConfiguration {
     @Bean
     public LocationRepository locationRepositoryDummy() {
         return new LocationRepository() {
+            Address addressS1 = Address.of("SAMPLE1", "SAMPLE1", "SAMPLE1", "SAMPLE1", "SAMPLE1");
+            Address addressS2 = Address.of("SAMPLE2", "SAMPLE2", "SAMPLE2", "SAMPLE2", "SAMPLE2");
+            Location sample1 = Location.of(LocationId.of("SAMPLE1"), addressS1, CompanyId.of("SAMPLE1"), LocalDate.now());
+            Location sample2 = Location.of(LocationId.of("SAMPLE2"), addressS2, CompanyId.of("SAMPLE2"), LocalDate.now());
+            Set<Location> location = init();
 
-            Set<Location> location = new HashSet<Location>();
+            private Set<Location> init(){
+                Set<Location> location = new HashSet<>();
+                Collections.addAll(location, sample1, sample2);
+                return location;
+            }
 
             @Override
             public void store(Location newLocation) {
