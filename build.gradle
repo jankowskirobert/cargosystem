@@ -6,8 +6,8 @@ version = '0.0.1-SNAPSHOT'
 
 description = """cargosystem"""
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 1.10
+targetCompatibility = 1.10
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
@@ -19,6 +19,7 @@ repositories {
      maven { url "https://repo.maven.apache.org/maven2" }
 }
 dependencies {
+    compile files('libs/lombok.jar')
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.0.1.RELEASE'
     compile group: 'eu.jankowskirobert', name: 'cqrs', version:'0.0.1-SNAPSHOT'
     compile group: 'org.hibernate.validator', name: 'hibernate-validator', version:'6.0.2.Final'
