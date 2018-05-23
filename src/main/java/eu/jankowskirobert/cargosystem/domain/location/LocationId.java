@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor(staticName = "of")
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "of")
 public class LocationId {
      @NotNull
      private String id;
