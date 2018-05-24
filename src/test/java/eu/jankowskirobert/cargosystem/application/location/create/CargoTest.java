@@ -8,10 +8,15 @@ import eu.jankowskirobert.cargosystem.domain.location.Location;
 import eu.jankowskirobert.cargosystem.domain.location.LocationId;
 import eu.jankowskirobert.cargosystem.domain.location.LocationRepository;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = {TestConfiguration.class})
 public class CargoTest {
 
     @Autowired
@@ -22,7 +27,7 @@ public class CargoTest {
         Location sample1 = locationRepository.find(LocationId.of("SAMPLE1"));
         Location sample2 = locationRepository.find(LocationId.of("SAMPLE2"));
         TransitMovement first = TransitMovement.of(sample1, sample2, LocalDateTime.now(), LocalDateTime.now());
-        TransitMovement second= TransitMovement.of(sample2, sample1, LocalDateTime.now(), LocalDateTime.now());
+        TransitMovement second = TransitMovement.of(sample2, sample1, LocalDateTime.now(), LocalDateTime.now());
         Transit transit = Transit.of(TransitId.of("0123"), Schedule.of(first, second));
     }
 }

@@ -35,7 +35,8 @@ public class TestConfiguration {
 
             private Set<Location> init(){
                 Set<Location> location = new HashSet<>();
-                Collections.addAll(location, sample1, sample2);
+                location.add(sample1);
+                location.add(sample2);
                 return location;
             }
 
