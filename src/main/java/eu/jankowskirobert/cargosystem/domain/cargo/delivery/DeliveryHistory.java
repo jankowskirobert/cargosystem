@@ -1,4 +1,4 @@
-package eu.jankowskirobert.cargosystem.domain.cargo;
+package eu.jankowskirobert.cargosystem.domain.cargo.delivery;
 
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompany;

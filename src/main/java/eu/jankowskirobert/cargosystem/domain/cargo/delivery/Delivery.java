@@ -1,5 +1,10 @@
-package eu.jankowskirobert.cargosystem.domain.cargo;
+package eu.jankowskirobert.cargosystem.domain.cargo.delivery;
 
+import eu.jankowskirobert.cargosystem.domain.cargo.Itinerary;
+import eu.jankowskirobert.cargosystem.domain.cargo.RouteSpecification;
+import eu.jankowskirobert.cargosystem.domain.cargo.transit.Transit;
+import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingActivity;
+import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingEvent;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

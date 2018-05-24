@@ -1,4 +1,4 @@
-package eu.jankowskirobert.cargosystem.domain.cargo;
+package eu.jankowskirobert.cargosystem.domain.cargo.transit;
 
 import lombok.Getter;
 import lombok.experimental.Accessors;

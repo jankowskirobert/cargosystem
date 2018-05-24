@@ -1,6 +1,6 @@
-package eu.jankowskirobert.cargosystem.domain.cargo;
+package eu.jankowskirobert.cargosystem.domain.cargo.handling;
 
-import eu.jankowskirobert.cargosystem.domain.location.Location;
+import eu.jankowskirobert.cargosystem.domain.cargo.CargoId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.experimental.Accessors;

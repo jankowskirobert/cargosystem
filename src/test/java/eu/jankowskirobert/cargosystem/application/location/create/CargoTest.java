@@ -1,9 +1,9 @@
 package eu.jankowskirobert.cargosystem.application.location.create;
 
-import eu.jankowskirobert.cargosystem.domain.cargo.Schedule;
-import eu.jankowskirobert.cargosystem.domain.cargo.Transit;
-import eu.jankowskirobert.cargosystem.domain.cargo.TransitId;
-import eu.jankowskirobert.cargosystem.domain.cargo.TransitMovement;
+import eu.jankowskirobert.cargosystem.domain.cargo.transit.Schedule;
+import eu.jankowskirobert.cargosystem.domain.cargo.transit.Transit;
+import eu.jankowskirobert.cargosystem.domain.cargo.transit.TransitId;
+import eu.jankowskirobert.cargosystem.domain.cargo.transit.TransitMovement;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import eu.jankowskirobert.cargosystem.domain.location.LocationId;
 import eu.jankowskirobert.cargosystem.domain.location.LocationRepository;

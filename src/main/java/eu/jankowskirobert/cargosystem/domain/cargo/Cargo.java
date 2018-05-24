@@ -1,5 +1,7 @@
 package eu.jankowskirobert.cargosystem.domain.cargo;
 
+import eu.jankowskirobert.cargosystem.domain.cargo.delivery.Delivery;
+import eu.jankowskirobert.cargosystem.domain.cargo.delivery.DeliveryHistory;
 import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.domain.freight.Freight;
 import eu.jankowskirobert.cargosystem.domain.location.Location;

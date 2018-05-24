@@ -1,7 +1,7 @@
 package eu.jankowskirobert.cargosystem.domain.cargo;
 
+import eu.jankowskirobert.cargosystem.domain.cargo.transit.Transit;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
-import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompany;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

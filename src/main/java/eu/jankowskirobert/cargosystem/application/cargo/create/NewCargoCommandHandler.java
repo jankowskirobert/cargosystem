@@ -1,6 +1,7 @@
 package eu.jankowskirobert.cargosystem.application.cargo.create;
 
 import eu.jankowskirobert.cargosystem.domain.cargo.*;
+import eu.jankowskirobert.cargosystem.domain.cargo.TransportNumber;
 import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyId;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyRepository;
