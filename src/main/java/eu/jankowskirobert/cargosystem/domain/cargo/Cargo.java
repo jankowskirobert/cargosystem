@@ -38,6 +38,13 @@ public class Cargo {
         return cargo;
     }
 
+    public static Cargo newEmpty(CargoId id, TransportNumber transportNumber, RouteSpecification routeSpecification) {
+        Delivery delivery = Delivery.of(null, routeSpecification, Itinerary.empty());
+        Cargo cargo = new Cargo(id, transportNumber, TransportCompany.empty(), Company.empty(), routeSpecification.origin(), routeSpecification, Itinerary.empty(), delivery, null);
+        return cargo;
+    }
+
+
     public boolean withSameNumber(Cargo cargo){
         return this.transportNumber.equals(cargo.getTransportNumber());
     }

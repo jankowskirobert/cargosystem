@@ -49,7 +49,7 @@ public class Delivery {
     private HandlingActivity predictNextEvent(HandlingActivity activity, RouteSpecification routeSpecification, Itinerary itinerary) {
         switch (activity.type()) {
             case LOAD: {
-
+                return HandlingActivity.of(HandlingActivity.Type.UNLOAD, itinerary.getLegs().get(0).getTransit(),routeSpecification.origin());
             }
         }
         return handlingEvent.activity();
@@ -73,7 +73,7 @@ public class Delivery {
 
     private DeliveryStatus matchDeliveryStatus(HandlingActivity activity) {
         if (!Objects.isNull(activity))
-            return activity.type().obtain();
+            return DeliveryStatus.UNKNOWN;
         return null;
     }
 }
