@@ -25,7 +25,7 @@ public class Delivery {
     private Location lastLocation;
     private Transit current;
     private LocalDateTime estimatedTimeOfArrival;
-    private HandlingActivity nextActivity;
+    private HandlingActivity.Type[] nextActivityType;
     private RoutingStatus routingStatus;
     private HandlingEvent handlingEvent;
 
@@ -39,20 +39,31 @@ public class Delivery {
             this.deliveryStatus = this.matchDeliveryStatus(event.activity());
             this.lastLocation = this.dispatchLocationFromEvent(event.activity());
             this.current = this.dispatchTransitFromEvent(event.activity());
-            this.nextActivity = this.predictNextEvent(event.activity(), routeSpecification, itinerary);
+            this.nextActivityType = this.predictNextEventTypes(event.activity(), routeSpecification, itinerary);
         }
         this.estimatedTimeOfArrival = this.estimate(itinerary);
 
         this.routingStatus = RoutingStatus.NOT_ROUTED;
     }
-
-    private HandlingActivity predictNextEvent(HandlingActivity activity, RouteSpecification routeSpecification, Itinerary itinerary) {
+    /*
+        jesli obecne zdarzenie = zaladunek to nastepne powinno byc wyladunkiem
+        jesli obecne zdarzenie = wyladunek to nastepne powinno byc zaladunkiem lub odbiorem lub zwrotem
+        jesli obecne zdarzenie = odbior to nastepne moze byc zaladunkiem jesli jest w planie jeszcze jakas mozliwosc poruszania sie
+     */
+    private HandlingActivity.Type[] predictNextEventTypes(HandlingActivity activity, RouteSpecification routeSpecification, Itinerary itinerary) {
         switch (activity.type()) {
             case LOAD: {
-                return HandlingActivity.of(HandlingActivity.Type.UNLOAD, itinerary.getLegs().get(0).getTransit(),routeSpecification.origin());
+                return new HandlingActivity.Type[]{HandlingActivity.Type.UNLOAD, HandlingActivity.Type.CHECK};
             }
+            case UNLOAD: {
+                return new HandlingActivity.Type[]{HandlingActivity.Type.UNLOAD, HandlingActivity.Type.CHECK};
+            }
+            case RECEIVE: {
+                return new HandlingActivity.Type[]{HandlingActivity.Type.CHECK, HandlingActivity.Type.LOAD, HandlingActivity.Type.CLAIM};
+            }
+            default:
+                return new HandlingActivity.Type[]{HandlingActivity.Type.UNKNOWN};
         }
-        return handlingEvent.activity();
     }
 
     private LocalDateTime estimate(Itinerary itinerary) {

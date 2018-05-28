@@ -21,49 +21,8 @@ public class HandlingActivity {
     private Transit transit;
     private Location location;
 
-    public enum Type implements TransportStatusDecision, TransportFutureDecision {
-        LOAD {
-            @Override
-            public HandlingActivity predict(RouteSpecification routeSpecification, Itinerary itinerary) {
-
-                return null;
-            }
-
-            @Override
-            public DeliveryStatus obtain() {
-                return DeliveryStatus.ON_THE_WAY;
-            }
-        }, UNLOAD {
-            @Override
-            public HandlingActivity predict(RouteSpecification routeSpecification, Itinerary itinerary) {
-                return null;
-            }
-
-            @Override
-            public DeliveryStatus obtain() {
-                return DeliveryStatus.IN_MAGAZINE;
-            }
-        }, RECEIVE {
-            @Override
-            public HandlingActivity predict(RouteSpecification routeSpecification, Itinerary itinerary) {
-                return null;
-            }
-
-            @Override
-            public DeliveryStatus obtain() {
-                return DeliveryStatus.TRANSFERED;
-            }
-        }, CLAIM {
-            @Override
-            public HandlingActivity predict(RouteSpecification routeSpecification, Itinerary itinerary) {
-                return null;
-            }
-
-            @Override
-            public DeliveryStatus obtain() {
-                return DeliveryStatus.WAITING;
-            }
-        }
+    public enum Type {
+        LOAD, UNLOAD, RECEIVE, CLAIM, CHECK, UNKNOWN
     }
 
 }
