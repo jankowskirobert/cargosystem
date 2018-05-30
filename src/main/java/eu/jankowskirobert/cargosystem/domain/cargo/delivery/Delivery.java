@@ -49,7 +49,7 @@ public class Delivery {
     private HandlingActivity predictNextEvent(HandlingActivity activity, RouteSpecification routeSpecification, Itinerary itinerary) {
         switch (activity.type()) {
             case LOAD: {
-
+                return HandlingActivity.of(HandlingActivity.Type.ANY, itinerary.getLegs().get(1).getTransit(), routeSpecification.origin()  );
             }
         }
         return handlingEvent.activity();

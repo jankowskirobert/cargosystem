@@ -1,5 +1,6 @@
-package eu.jankowskirobert.cargosystem.application.location.create;
+package eu.jankowskirobert.cargosystem.application.location.register;
 
+import eu.jankowskirobert.cargosystem.domain.company.CompanyId;
 import eu.jankowskirobert.cargosystem.shared.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,13 +13,11 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor(staticName = "of")
 @Builder
-public class NewLocationCommand {
+public class RegisterLocationCommand {
 
-	@NotBlank
-    private String id;
 	@NotNull
 	private Address address;
 	@NotBlank
-	private String companyId;	
+	private CompanyId companyId;
 	private LocalDate availability;
 }

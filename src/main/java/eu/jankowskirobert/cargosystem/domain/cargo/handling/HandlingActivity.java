@@ -21,11 +21,10 @@ public class HandlingActivity {
     private Transit transit;
     private Location location;
 
-    enum Type implements TransportStatusDecision, TransportFutureDecision {
+    public enum Type implements TransportStatusDecision, TransportFutureDecision {
         LOAD {
             @Override
             public HandlingActivity predict(RouteSpecification routeSpecification, Itinerary itinerary) {
-
                 return null;
             }
 
@@ -62,6 +61,16 @@ public class HandlingActivity {
             @Override
             public DeliveryStatus obtain() {
                 return DeliveryStatus.WAITING;
+            }
+        }, ANY {
+            @Override
+            public DeliveryStatus obtain() {
+                return null;
+            }
+
+            @Override
+            public HandlingActivity predict(RouteSpecification routeSpecification, Itinerary itinerary) {
+                return null;
             }
         }
     }

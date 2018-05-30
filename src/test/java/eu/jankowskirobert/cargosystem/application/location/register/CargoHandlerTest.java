@@ -1,7 +1,7 @@
-package eu.jankowskirobert.cargosystem.application.location.create;
+package eu.jankowskirobert.cargosystem.application.location.register;
 
-import eu.jankowskirobert.cargosystem.application.cargo.create.NewCargoCommand;
-import eu.jankowskirobert.cargosystem.application.cargo.create.NewCargoCommandHandler;
+import eu.jankowskirobert.cargosystem.application.cargo.register.RegisterCargoCommand;
+import eu.jankowskirobert.cargosystem.application.cargo.register.RegisterCargoCommandHandler;
 import eu.jankowskirobert.cargosystem.domain.cargo.CargoRepository;
 import eu.jankowskirobert.cargosystem.domain.cargo.TransportNumber;
 import eu.jankowskirobert.cargosystem.domain.company.Company;
@@ -9,7 +9,7 @@ import eu.jankowskirobert.cargosystem.domain.company.CompanyId;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyRepository;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import eu.jankowskirobert.cargosystem.domain.location.LocationId;
-import eu.jankowskirobert.cargosystem.domain.location.LocationRepository;
+import eu.jankowskirobert.cargosystem.domain.location.LocationQueryRepository;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompany;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompanyId;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompanyRepository;
@@ -29,7 +29,7 @@ import java.time.LocalDate;
 @ContextConfiguration(classes = {TestConfiguration.class})
 public class CargoHandlerTest {
     @Autowired
-    private LocationRepository locationRepository;
+    private LocationQueryRepository locationQueryRepository;
     @Autowired
     private CompanyRepository companyRepository;
     @Autowired
@@ -54,16 +54,16 @@ public class CargoHandlerTest {
         Location to = Location.of(locationIdT,address,companyId, LocalDate.now());
 
 
-        locationRepository.store(from);
-        locationRepository.store(to);
+        locationQueryRepository.store(from);
+        locationQueryRepository.store(to);
 
     }
 
     @Test
     public void shouldCreateNewCargo() {
         //given
-        NewCargoCommand newCargo = NewCargoCommand.of("123", "Fridge", BigDecimal.TEN, "001", "001", "001","002",  LocalDate.now());
-        NewCargoCommandHandler handler = NewCargoCommandHandler.of(cargoRepository, companyRepository, transportCompanyRepository, locationRepository);
+        RegisterCargoCommand newCargo = RegisterCargoCommand.of("123", "Fridge", BigDecimal.TEN, "001", "001", "001","002",  LocalDate.now());
+        RegisterCargoCommandHandler handler = RegisterCargoCommandHandler.of(cargoRepository, companyRepository, transportCompanyRepository, locationQueryRepository);
         //when
         handler.handle(newCargo);
         //then

@@ -13,4 +13,5 @@ public class Address {
 	private String state;
 	private String region;
 	private String country;
+	private Continent continent;
 }

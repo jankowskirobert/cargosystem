@@ -1,13 +1,16 @@
 package eu.jankowskirobert.cargosystem.standalone;
 
-/**
- * Hello world!
- *
- */
+import javafx.application.Application;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@EnableAutoConfiguration
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        SpringApplication.run(Application.class, args);
     }
 }

@@ -1,4 +1,4 @@
-package eu.jankowskirobert.cargosystem.application.location.create;
+package eu.jankowskirobert.cargosystem.application.location.register;
 
 import eu.jankowskirobert.cargosystem.domain.cargo.*;
 import eu.jankowskirobert.cargosystem.domain.cargo.TransportNumber;
@@ -8,13 +8,14 @@ import eu.jankowskirobert.cargosystem.domain.company.CompanyRepository;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyRepositoryException;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import eu.jankowskirobert.cargosystem.domain.location.LocationId;
-import eu.jankowskirobert.cargosystem.domain.location.LocationRepository;
+import eu.jankowskirobert.cargosystem.domain.location.LocationQueryRepository;
 import eu.jankowskirobert.cargosystem.domain.location.LocationRepositoryException;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompany;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompanyId;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompanyRepository;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompanyRepositoryException;
 import eu.jankowskirobert.cargosystem.shared.Address;
+import eu.jankowskirobert.cargosystem.shared.Continent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,10 +26,10 @@ import java.util.stream.Collectors;
 @Configuration
 public class TestConfiguration {
     @Bean
-    public LocationRepository locationRepositoryDummy() {
-        return new LocationRepository() {
-            Address addressS1 = Address.of("SAMPLE1", "SAMPLE1", "SAMPLE1", "SAMPLE1", "SAMPLE1");
-            Address addressS2 = Address.of("SAMPLE2", "SAMPLE2", "SAMPLE2", "SAMPLE2", "SAMPLE2");
+    public LocationQueryRepository locationRepositoryDummy() {
+        return new LocationQueryRepository() {
+            Address addressS1 = Address.of("SAMPLE1", "SAMPLE1", "SAMPLE1", "SAMPLE1", "SAMPLE1", Continent.EUROPE);
+            Address addressS2 = Address.of("SAMPLE2", "SAMPLE2", "SAMPLE2", "SAMPLE2", "SAMPLE2", Continent.EUROPE);
             Location sample1 = Location.of(LocationId.of("SAMPLE1"), addressS1, CompanyId.of("SAMPLE1"), LocalDate.now());
             Location sample2 = Location.of(LocationId.of("SAMPLE2"), addressS2, CompanyId.of("SAMPLE2"), LocalDate.now());
             Set<Location> location = init();

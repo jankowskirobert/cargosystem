@@ -1,4 +1,4 @@
-package eu.jankowskirobert.cargosystem.application.location.create;
+package eu.jankowskirobert.cargosystem.application.location.register;
 
 import java.util.Objects;
 
@@ -10,24 +10,21 @@ import eu.jankowskirobert.cqrs.infrastructure.CommandHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.Valid;
-import javax.validation.ValidatorFactory;
-
 @Validated
 @AllArgsConstructor
-public class NewLocationCommandHandler implements CommandHandler<NewLocationCommand> {
+public class NewLocationCommandHandler implements CommandHandler<RegisterLocationCommand> {
 
-    private final LocationRepository locationRepository;
+    private final LocationQueryRepository locationQueryRepository;
     private final CompanyRepository companyRepository;
 
     @Override
-    public void handle(NewLocationCommand command) {
+    public void handle(RegisterLocationCommand command) {
         LocationId id = LocationId.of(command.getId());
         CompanyId companyId = CompanyId.of(command.getCompanyId());
         Company company = companyRepository.find(companyId);
         if (!Objects.isNull(company)) {
             Location newLocation = Location.of(id, command.getAddress(), companyId, command.getAvailability());
-            locationRepository.store(newLocation);
+            locationQueryRepository.store(newLocation);
         } else {
             throw new NewLocationCommandHandlerException("Cannot find company identified by: " + companyId.toString());
         }
