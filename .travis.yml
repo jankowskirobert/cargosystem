@@ -26,4 +26,4 @@ matrix:
 # Java 11 "Oracle JDK"
     - env: JDK='Oracle JDK 11'
       install: . ./install-jdk.sh -F 11 -L BCL
-script: mvn clean verify compile
+script: mvn -nsu clean verify compile

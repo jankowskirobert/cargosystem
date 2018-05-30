@@ -45,6 +45,8 @@
             <groupId>eu.jankowskirobert</groupId>
             <artifactId>cqrs</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <type>jar</type>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate.validator</groupId>
