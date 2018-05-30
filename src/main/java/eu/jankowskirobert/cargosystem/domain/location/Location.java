@@ -12,10 +12,10 @@ import java.time.LocalDate;
 @AllArgsConstructor(staticName = "of")
 @Getter
 @Builder
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = {"id"}, doNotUseGetters= true, exclude = {"address","company", "availability"})
 public class Location {
 	private LocationId id;
 	private Address address;
-	private Company companyId;
+	private Company company;
 	private LocalDate availability;
 }

@@ -15,8 +15,8 @@ public class RegisterLocationCommandHandler implements CommandHandler<RegisterLo
 
     @Override
     public Void handle(RegisterLocationCommand command) {
-        LocationId locationId = LocationId.random();
-        Location newLocation = Location.of(locationId, command.getAddress(), command.getCompanyId(), command.getAvailability());
+        LocationId locationId = command.getId();
+        Location newLocation = Location.of(locationId, command.getAddress(), command.getCompany(), command.getAvailability());
         locationQueryRepository.store(newLocation);
         return null;
     }

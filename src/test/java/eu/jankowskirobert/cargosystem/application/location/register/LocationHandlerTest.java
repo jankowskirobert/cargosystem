@@ -18,6 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {TestConfiguration.class})
@@ -25,8 +26,7 @@ public class LocationHandlerTest {
 
 	@Autowired
 	private LocationQueryRepository locationQueryRepository;
-	@Autowired
-	private CompanyRepository companyRepository;
+
 	private RegisterLocationCommandHandler registerLocationCommandHandler;
     private final String companyId = "001";
 	@Before
@@ -36,22 +36,23 @@ public class LocationHandlerTest {
 	
 	@Test
 	public void shouldCreateNewLocation() {
+		String id = UUID.randomUUID().toString();
 		Company company = Company.empty();
 		Address address = Address.of("", "", "", "", "", Continent.EUROPE);
         LocalDate now = LocalDate.now();
-        RegisterLocationCommand command = RegisterLocationCommand.of(address, company, now);
+        RegisterLocationCommand command = RegisterLocationCommand.of(LocationId.of(id), address, company, now);
 		registerLocationCommandHandler.handle(command);
-		String id = "T1";
 		Location xxx = Location.of(LocationId.of(id),address, company, now);
         Assert.assertThat(locationQueryRepository.find(LocationId.of(id)), Matchers.equalTo(xxx));
 	}
 
     @Test(expected = LocationRepositoryException.class)
     public void shouldCreateNewLocation_secondStoreThrowException() {
+        String id = UUID.randomUUID().toString();
         Company company = Company.empty();
         Address address = Address.of("", "", "", "", "", Continent.EUROPE);
         LocalDate now = LocalDate.now();
-        RegisterLocationCommand command = RegisterLocationCommand.of(address, company, now);
+        RegisterLocationCommand command = RegisterLocationCommand.of(LocationId.of(id),address, company, now);
         registerLocationCommandHandler.handle(command);
         registerLocationCommandHandler.handle(command);
     }

@@ -35,11 +35,12 @@ public class CargoHandlerTest {
         Location from = Location.of(locationIdF,address,company, LocalDate.now());
         Location to = Location.of(locationIdT,address,company, LocalDate.now());
         //given
-        RegisterCargoCommand newCargo = RegisterCargoCommand.of(TransportNumber.random(), "Fridge", from, to, LocalDate.now());
+        TransportNumber random = TransportNumber.random();
+        RegisterCargoCommand newCargo = RegisterCargoCommand.of(random, "Fridge", from, to, LocalDate.now());
         RegisterCargoCommandHandler handler = RegisterCargoCommandHandler.of(cargoRepository);
         //when
         handler.handle(newCargo);
         //then
-        Assert.assertNotNull(cargoRepository.findFirst(TransportNumber.of("123")));
+        Assert.assertNotNull(cargoRepository.findFirst(random));
     }
 }

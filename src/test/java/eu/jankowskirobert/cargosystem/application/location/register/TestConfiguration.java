@@ -30,14 +30,15 @@ public class TestConfiguration {
         return new LocationQueryRepository() {
             Address addressS1 = Address.of("SAMPLE1", "SAMPLE1", "SAMPLE1", "SAMPLE1", "SAMPLE1", Continent.EUROPE);
             Address addressS2 = Address.of("SAMPLE2", "SAMPLE2", "SAMPLE2", "SAMPLE2", "SAMPLE2", Continent.EUROPE);
-            Location sample1 = Location.of(LocationId.of("SAMPLE1"), addressS1, CompanyId.of("SAMPLE1"), LocalDate.now());
-            Location sample2 = Location.of(LocationId.of("SAMPLE2"), addressS2, CompanyId.of("SAMPLE2"), LocalDate.now());
+            Company company = Company.empty();
+            Location sample1 = Location.of(LocationId.of("SAMPLE1"), addressS1,company, LocalDate.now());
+            Location sample2 = Location.of(LocationId.of("SAMPLE2"), addressS2,company, LocalDate.now());
             Set<Location> location = init();
 
             private Set<Location> init(){
                 Set<Location> location = new HashSet<>();
-                location.add(sample1);
-                location.add(sample2);
+                boolean s1 = location.add(sample1);
+                boolean s2 = location.add(sample2);
                 return location;
             }
 
