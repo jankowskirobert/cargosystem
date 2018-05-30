@@ -1,10 +1,13 @@
 package eu.jankowskirobert.cargosystem.domain.location;
 
-import java.time.LocalDate;
-
-import eu.jankowskirobert.cargosystem.domain.company.CompanyId;
+import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.shared.Address;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+
+import java.time.LocalDate;
 
 @AllArgsConstructor(staticName = "of")
 @Getter
@@ -13,6 +16,6 @@ import lombok.*;
 public class Location {
 	private LocationId id;
 	private Address address;
-	private CompanyId companyId;
+	private Company companyId;
 	private LocalDate availability;
 }

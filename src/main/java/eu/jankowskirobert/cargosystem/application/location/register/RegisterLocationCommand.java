@@ -1,6 +1,6 @@
 package eu.jankowskirobert.cargosystem.application.location.register;
 
-import eu.jankowskirobert.cargosystem.domain.company.CompanyId;
+import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.shared.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +18,6 @@ public class RegisterLocationCommand {
 	@NotNull
 	private Address address;
 	@NotBlank
-	private CompanyId companyId;
+	private Company companyId;
 	private LocalDate availability;
 }
