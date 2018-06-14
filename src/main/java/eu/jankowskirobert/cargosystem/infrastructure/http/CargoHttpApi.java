@@ -2,7 +2,6 @@ package eu.jankowskirobert.cargosystem.infrastructure.http;
 
 import eu.jankowskirobert.cargosystem.application.cargo.register.RegisterCargoCommand;
 import eu.jankowskirobert.cargosystem.application.cargo.register.RegisterCargoCommandHandler;
-import eu.jankowskirobert.cqrs.CommandExecutor;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

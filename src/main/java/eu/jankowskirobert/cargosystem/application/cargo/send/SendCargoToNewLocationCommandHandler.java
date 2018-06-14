@@ -2,7 +2,7 @@ package eu.jankowskirobert.cargosystem.application.cargo.send;
 
 import eu.jankowskirobert.cargosystem.domain.cargo.Cargo;
 import eu.jankowskirobert.cargosystem.domain.cargo.CargoRepository;
-import eu.jankowskirobert.cqrs.infrastructure.CommandHandler;
+import eu.jankowskirobert.cargosystem.infrastructure.cqrs.CommandHandler;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

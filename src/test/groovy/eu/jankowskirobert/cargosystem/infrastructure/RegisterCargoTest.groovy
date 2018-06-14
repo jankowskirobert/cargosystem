@@ -13,7 +13,6 @@ import eu.jankowskirobert.cargosystem.infrastructure.http.RegisterCargoCommandFa
 import eu.jankowskirobert.cargosystem.infrastructure.http.RegisterCargoDTO
 import eu.jankowskirobert.cargosystem.shared.Address
 import eu.jankowskirobert.cargosystem.shared.Continent
-import eu.jankowskirobert.cqrs.CommandExecutor
 import spock.lang.Specification
 
 import java.time.LocalDate

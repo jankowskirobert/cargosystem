@@ -1,9 +1,9 @@
 package eu.jankowskirobert.cargosystem.infrastructure.http;
 
 import eu.jankowskirobert.cargosystem.application.location.LocationQuery;
+import eu.jankowskirobert.cargosystem.application.location.register.RegisterLocationCommandHandler;
 import eu.jankowskirobert.cargosystem.composite.location.LocationWithAssignedCompanyViewDTO;
 import eu.jankowskirobert.cargosystem.application.location.register.RegisterLocationCommand;
-import eu.jankowskirobert.cqrs.CommandExecutor;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,12 +16,12 @@ import java.util.List;
 @RestController("/location")
 public class LocationHttpApi {
 	
-	private final CommandExecutor commandHandler;
+	private final RegisterLocationCommandHandler registerLocationCommandHandler;
 	private final LocationQuery locationQuery;
 	
 	@PostMapping(path = "/new")
 	public void addNewLocation(@Valid final RegisterLocationCommand registerLocationCommand) {
-		commandHandler.asyncExecutor(registerLocationCommand);
+		registerLocationCommandHandler.handle(registerLocationCommand);
 	}
 
 	@GetMapping(path = "/find")

@@ -42,11 +42,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>eu.jankowskirobert</groupId>
-            <artifactId>cqrs</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>6.0.2.Final</version>
@@ -123,16 +118,6 @@
 
         </plugins>
     </build>
-    <repositories>
-        <repository>
-            <id>maven-repository</id>
-            <url>file:///${env.M2_HOME}/repository</url>
-        </repository>
-        <repository>
-            <id>localrepository</id>
-            <url>file:///${env.M2_HOME}/repository</url>
-        </repository>
-    </repositories>
     <reporting>
         <plugins>
             <plugin>
