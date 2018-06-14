@@ -1,5 +1,6 @@
 package eu.jankowskirobert.cargosystem.application.location.register;
 
+import eu.jankowskirobert.cargosystem.composite.location.LocationQueryRepository;
 import eu.jankowskirobert.cargosystem.domain.cargo.Cargo;
 import eu.jankowskirobert.cargosystem.domain.cargo.CargoId;
 import eu.jankowskirobert.cargosystem.domain.cargo.RouteSpecification;
@@ -10,7 +11,6 @@ import eu.jankowskirobert.cargosystem.domain.cargo.transit.TransitId;
 import eu.jankowskirobert.cargosystem.domain.cargo.transit.TransitMovement;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import eu.jankowskirobert.cargosystem.domain.location.LocationId;
-import eu.jankowskirobert.cargosystem.domain.location.LocationQueryRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

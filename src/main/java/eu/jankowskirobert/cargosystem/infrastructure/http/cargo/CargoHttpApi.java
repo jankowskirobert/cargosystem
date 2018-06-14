@@ -6,15 +6,18 @@ import eu.jankowskirobert.cargosystem.composite.cargo.RegisterCargoCommandFactor
 import eu.jankowskirobert.cargosystem.composite.cargo.RegisterCargoDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor(staticName = "of")
-@RestController("/cargo")
+@RestController
+@RequestMapping(value = "/cargo")
 public class CargoHttpApi {
     private RegisterCargoCommandHandler registerCargoCommandHandler;
     private RegisterCargoCommandFactory registerCargoCommandFactory;
 
-    @PostMapping(path = "/register")
+    @RequestMapping(value = "register", method = RequestMethod.POST)
     public String registerCargo(final RegisterCargoDTO registerCargoDTO) {
         RegisterCargoCommand registerCargoCommand = registerCargoCommandFactory.cargo(registerCargoDTO);
         registerCargoCommandHandler.handle(registerCargoCommand);

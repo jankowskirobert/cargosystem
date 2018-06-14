@@ -2,16 +2,17 @@ package eu.jankowskirobert.cargosystem.application.location.register;
 
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import eu.jankowskirobert.cargosystem.domain.location.LocationId;
-import eu.jankowskirobert.cargosystem.domain.location.LocationQueryRepository;
+import eu.jankowskirobert.cargosystem.domain.location.LocationWriteRepository;
 import eu.jankowskirobert.cargosystem.infrastructure.cqrs.CommandHandler;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 
-@Validated
-@AllArgsConstructor
+@AllArgsConstructor(staticName = "of")
 public class RegisterLocationCommandHandler implements CommandHandler<RegisterLocationCommand, Void> {
 
-    private final LocationQueryRepository locationQueryRepository;
+    private final LocationWriteRepository locationQueryRepository;
 
     @Override
     public Void handle(RegisterLocationCommand command) {

@@ -5,31 +5,30 @@ import eu.jankowskirobert.cargosystem.application.location.register.RegisterLoca
 import eu.jankowskirobert.cargosystem.composite.location.LocationWithAssignedCompanyViewDTO;
 import eu.jankowskirobert.cargosystem.application.location.register.RegisterLocationCommand;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@AllArgsConstructor
-@RestController("/location")
+@AllArgsConstructor(staticName = "of")
+@RestController
+@RequestMapping(value = "/location")
 public class LocationHttpApi {
 	
 	private final RegisterLocationCommandHandler registerLocationCommandHandler;
 	private final LocationQuery locationQuery;
 	
-	@PostMapping(path = "/new")
+	@RequestMapping(value = "register", method = RequestMethod.POST)
 	public void addNewLocation(@Valid final RegisterLocationCommand registerLocationCommand) {
 		registerLocationCommandHandler.handle(registerLocationCommand);
 	}
 
-	@GetMapping(path = "/find")
+	@RequestMapping(value = "find", method = RequestMethod.GET)
 	public LocationWithAssignedCompanyViewDTO addNewLocation(final String id) {
 		return locationQuery.getPendingLocation(id);
 	}
 
-	@GetMapping(path = "/all")
+	@RequestMapping(value = "all", method = RequestMethod.GET)
 	public List<LocationWithAssignedCompanyViewDTO> addNewLocation() {
 		return locationQuery.getPendingLocations();
 	}

@@ -1,11 +1,11 @@
 package eu.jankowskirobert.cargosystem.application.location.register;
 
+import eu.jankowskirobert.cargosystem.composite.location.LocationQueryRepository;
 import eu.jankowskirobert.cargosystem.domain.company.Company;
-import eu.jankowskirobert.cargosystem.domain.company.CompanyRepository;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import eu.jankowskirobert.cargosystem.domain.location.LocationId;
-import eu.jankowskirobert.cargosystem.domain.location.LocationQueryRepository;
 import eu.jankowskirobert.cargosystem.domain.location.LocationRepositoryException;
+import eu.jankowskirobert.cargosystem.domain.location.LocationWriteRepository;
 import eu.jankowskirobert.cargosystem.shared.Address;
 import eu.jankowskirobert.cargosystem.shared.Continent;
 import org.hamcrest.Matchers;
@@ -26,12 +26,14 @@ public class LocationHandlerTest {
 
 	@Autowired
 	private LocationQueryRepository locationQueryRepository;
+	@Autowired
+	private LocationWriteRepository locationWriteRepository;
 
 	private RegisterLocationCommandHandler registerLocationCommandHandler;
     private final String companyId = "001";
 	@Before
 	public void setUp() {
-		registerLocationCommandHandler = new RegisterLocationCommandHandler(locationQueryRepository);
+		registerLocationCommandHandler = RegisterLocationCommandHandler.of(locationWriteRepository);
 	}
 	
 	@Test
