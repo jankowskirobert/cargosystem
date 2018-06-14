@@ -1,5 +1,6 @@
-package eu.jankowskirobert.cargosystem.application.cargo.register;
+package eu.jankowskirobert.cargosystem.application.cargo.handlers;
 
+import eu.jankowskirobert.cargosystem.application.cargo.commands.RegisterCargoCommand;
 import eu.jankowskirobert.cargosystem.domain.cargo.*;
 import eu.jankowskirobert.cargosystem.infrastructure.cqrs.CommandHandler;
 import lombok.AccessLevel;

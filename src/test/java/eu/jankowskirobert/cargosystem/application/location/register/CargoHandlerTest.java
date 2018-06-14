@@ -1,7 +1,7 @@
 package eu.jankowskirobert.cargosystem.application.location.register;
 
-import eu.jankowskirobert.cargosystem.application.cargo.register.RegisterCargoCommand;
-import eu.jankowskirobert.cargosystem.application.cargo.register.RegisterCargoCommandHandler;
+import eu.jankowskirobert.cargosystem.application.cargo.commands.RegisterCargoCommand;
+import eu.jankowskirobert.cargosystem.application.cargo.handlers.RegisterCargoCommandHandler;
 import eu.jankowskirobert.cargosystem.domain.cargo.CargoRepository;
 import eu.jankowskirobert.cargosystem.domain.cargo.TransportNumber;
 import eu.jankowskirobert.cargosystem.domain.company.Company;

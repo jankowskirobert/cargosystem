@@ -1,4 +1,4 @@
-package eu.jankowskirobert.cargosystem.application.cargo.register;
+package eu.jankowskirobert.cargosystem.application.cargo.commands;
 
 import eu.jankowskirobert.cargosystem.domain.cargo.TransportNumber;
 import eu.jankowskirobert.cargosystem.domain.location.Location;

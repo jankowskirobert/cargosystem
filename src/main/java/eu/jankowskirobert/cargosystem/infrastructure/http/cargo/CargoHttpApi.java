@@ -1,9 +1,10 @@
-package eu.jankowskirobert.cargosystem.infrastructure.http;
+package eu.jankowskirobert.cargosystem.infrastructure.http.cargo;
 
-import eu.jankowskirobert.cargosystem.application.cargo.register.RegisterCargoCommand;
-import eu.jankowskirobert.cargosystem.application.cargo.register.RegisterCargoCommandHandler;
+import eu.jankowskirobert.cargosystem.application.cargo.commands.RegisterCargoCommand;
+import eu.jankowskirobert.cargosystem.application.cargo.handlers.RegisterCargoCommandHandler;
+import eu.jankowskirobert.cargosystem.composite.cargo.RegisterCargoCommandFactory;
+import eu.jankowskirobert.cargosystem.composite.cargo.RegisterCargoDTO;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 

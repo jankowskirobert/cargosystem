@@ -1,6 +1,6 @@
-package eu.jankowskirobert.cargosystem.infrastructure.http;
+package eu.jankowskirobert.cargosystem.composite.cargo;
 
-import eu.jankowskirobert.cargosystem.application.cargo.register.RegisterCargoCommand;
+import eu.jankowskirobert.cargosystem.application.cargo.commands.RegisterCargoCommand;
 import eu.jankowskirobert.cargosystem.domain.cargo.TransportNumber;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import eu.jankowskirobert.cargosystem.domain.location.LocationId;

@@ -1,4 +1,4 @@
-package eu.jankowskirobert.cargosystem.infrastructure.http;
+package eu.jankowskirobert.cargosystem.composite.cargo;
 
 import eu.jankowskirobert.cargosystem.domain.cargo.TransportNumber;
 

@@ -1,16 +1,16 @@
 package eu.jankowskirobert.cargosystem.infrastructure
 
-import eu.jankowskirobert.cargosystem.application.cargo.register.RegisterCargoCommandHandler
+import eu.jankowskirobert.cargosystem.composite.cargo.CargoQueryRepository
+import eu.jankowskirobert.cargosystem.application.cargo.handlers.RegisterCargoCommandHandler
 import eu.jankowskirobert.cargosystem.domain.cargo.CargoRepository
 import eu.jankowskirobert.cargosystem.domain.cargo.TransportNumber
 import eu.jankowskirobert.cargosystem.domain.company.Company
 import eu.jankowskirobert.cargosystem.domain.location.Location
 import eu.jankowskirobert.cargosystem.domain.location.LocationId
 import eu.jankowskirobert.cargosystem.domain.location.LocationQueryRepository
-import eu.jankowskirobert.cargosystem.infrastructure.http.CargoHttpApi
-import eu.jankowskirobert.cargosystem.infrastructure.http.CargoQueryRepository
-import eu.jankowskirobert.cargosystem.infrastructure.http.RegisterCargoCommandFactory
-import eu.jankowskirobert.cargosystem.infrastructure.http.RegisterCargoDTO
+import eu.jankowskirobert.cargosystem.infrastructure.http.cargo.CargoHttpApi
+import eu.jankowskirobert.cargosystem.composite.cargo.RegisterCargoCommandFactory
+import eu.jankowskirobert.cargosystem.composite.cargo.RegisterCargoDTO
 import eu.jankowskirobert.cargosystem.shared.Address
 import eu.jankowskirobert.cargosystem.shared.Continent
 import spock.lang.Specification
