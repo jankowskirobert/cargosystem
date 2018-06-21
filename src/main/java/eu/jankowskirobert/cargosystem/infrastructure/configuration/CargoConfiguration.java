@@ -5,7 +5,7 @@ import eu.jankowskirobert.cargosystem.composite.cargo.CargoQueryRepository;
 import eu.jankowskirobert.cargosystem.composite.cargo.RegisterCargoCommandFactory;
 import eu.jankowskirobert.cargosystem.composite.location.LocationQueryRepository;
 import eu.jankowskirobert.cargosystem.domain.cargo.*;
-import eu.jankowskirobert.cargosystem.infrastructure.http.cargo.CargoHttpApi;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -57,8 +57,8 @@ public class CargoConfiguration {
     }
 
     @Bean
-    public RegisterCargoCommandHandler registerCargoCommandHandler(CargoRepository cargoRepository){
-        return RegisterCargoCommandHandler.of(cargoRepository);
+    public RegisterCargoCommandHandler registerCargoCommandHandler(CargoRepository cargoRepository, ApplicationEventPublisher applicationEventPublisher){
+        return RegisterCargoCommandHandler.of(cargoRepository, applicationEventPublisher);
     }
 
     @Bean

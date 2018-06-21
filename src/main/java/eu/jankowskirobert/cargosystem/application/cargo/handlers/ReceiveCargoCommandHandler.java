@@ -14,18 +14,17 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ReceiveCargoCommandHandler implements CommandHandler<ReceiveCargoCommand, Void> {
+public class ReceiveCargoCommandHandler implements CommandHandler<ReceiveCargoCommand, HandlingEventId> {
 
     private CargoRepository cargoRepository;
     private HandlingEventRepository handlingEventRepository;
 
     @Override
-    public Void handle(ReceiveCargoCommand receiveCargoCommand) {
+    public HandlingEventId handle(ReceiveCargoCommand receiveCargoCommand) {
         Cargo cargo = cargoRepository.findFirst(receiveCargoCommand.transportNumber());
         HandlingEventId handlingEventId = HandlingEventId.random();
-
         HandlingEvent handlingEvent = HandlingEvent.of(handlingEventId, HandlingActivity.Type.RECEIVE, cargo, receiveCargoCommand.reciveTime(), receiveCargoCommand.reciveLocation());
         handlingEventRepository.store(handlingEvent);
-        return null;
+        return handlingEventId;
     }
 }

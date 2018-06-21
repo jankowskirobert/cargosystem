@@ -14,6 +14,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -24,6 +25,8 @@ import java.time.LocalDate;
 public class CargoHandlerTest {
     @Autowired
     private CargoRepository cargoRepository;
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @Test
     public void shouldCreateNewCargo() {
@@ -37,7 +40,7 @@ public class CargoHandlerTest {
         //given
         TransportNumber random = TransportNumber.random();
         RegisterCargoCommand newCargo = RegisterCargoCommand.of(random, "Fridge", from, to, LocalDate.now());
-        RegisterCargoCommandHandler handler = RegisterCargoCommandHandler.of(cargoRepository);
+        RegisterCargoCommandHandler handler = RegisterCargoCommandHandler.of(cargoRepository, applicationEventPublisher);
         //when
         handler.handle(newCargo);
         //then
