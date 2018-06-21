@@ -27,8 +27,8 @@ public class LocationDB implements LocationWriteRepository, LocationQueryReposit
 
     private Set<Location> init() {
         Set<Location> location = new HashSet<>();
-        boolean s1 = location.add(sample1);
-        boolean s2 = location.add(sample2);
+        location.add(sample1);
+        location.add(sample2);
         return location;
     }
 

@@ -21,7 +21,4 @@ public class OrderLine {
         return orderLine;
     }
 
-    private void increaseQuantity(){
-        this.quantity+=1;
-    }
 }

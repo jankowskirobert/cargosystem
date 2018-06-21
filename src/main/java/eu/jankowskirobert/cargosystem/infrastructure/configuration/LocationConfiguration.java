@@ -3,16 +3,10 @@ package eu.jankowskirobert.cargosystem.infrastructure.configuration;
 import eu.jankowskirobert.cargosystem.application.location.LocationQuery;
 import eu.jankowskirobert.cargosystem.application.location.register.RegisterLocationCommandHandler;
 import eu.jankowskirobert.cargosystem.composite.location.LocationQueryRepository;
-import eu.jankowskirobert.cargosystem.composite.location.LocationWithAssignedCompanyViewDTO;
-import eu.jankowskirobert.cargosystem.domain.location.Location;
-import eu.jankowskirobert.cargosystem.domain.location.LocationId;
 import eu.jankowskirobert.cargosystem.domain.location.LocationWriteRepository;
-import eu.jankowskirobert.cargosystem.infrastructure.http.LocationHttpApi;
 import eu.jankowskirobert.cargosystem.standalone.LocationDB;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.List;
 
 @Configuration
 public class LocationConfiguration {

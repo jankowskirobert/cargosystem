@@ -5,7 +5,6 @@ import eu.jankowskirobert.cargosystem.application.cargo.handlers.RegisterCargoCo
 import eu.jankowskirobert.cargosystem.composite.cargo.RegisterCargoCommandFactory;
 import eu.jankowskirobert.cargosystem.composite.cargo.RegisterCargoDTO;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;

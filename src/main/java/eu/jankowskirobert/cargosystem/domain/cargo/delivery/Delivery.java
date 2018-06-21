@@ -8,6 +8,7 @@ import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingEvent;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
@@ -20,6 +21,7 @@ import java.util.Objects;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Accessors(fluent = true)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
 public class Delivery {
     private DeliveryStatus deliveryStatus;
     private Location lastLocation;
@@ -39,10 +41,10 @@ public class Delivery {
             this.deliveryStatus = this.matchDeliveryStatus(event.activity());
             this.lastLocation = this.dispatchLocationFromEvent(event.activity());
             this.current = this.dispatchTransitFromEvent(event.activity());
-            this.nextActivityType = this.predictNextEventTypes(event.activity(), routeSpecification, itinerary);
+            this.nextActivityType = this.predictNextEventTypes(event.activity());
         }
         this.estimatedTimeOfArrival = this.estimate(itinerary);
-
+        this.lastLocation = routeSpecification.origin();
         this.routingStatus = RoutingStatus.NOT_ROUTED;
     }
     /*
@@ -50,7 +52,7 @@ public class Delivery {
         jesli obecne zdarzenie = wyladunek to nastepne powinno byc zaladunkiem lub odbiorem lub zwrotem
         jesli obecne zdarzenie = odbior to nastepne moze byc zaladunkiem jesli jest w planie jeszcze jakas mozliwosc poruszania sie
      */
-    private HandlingActivity.Type[] predictNextEventTypes(HandlingActivity activity, RouteSpecification routeSpecification, Itinerary itinerary) {
+    private HandlingActivity.Type[] predictNextEventTypes(HandlingActivity activity) {
         switch (activity.type()) {
             case LOAD: {
                 return new HandlingActivity.Type[]{HandlingActivity.Type.UNLOAD, HandlingActivity.Type.CHECK};
