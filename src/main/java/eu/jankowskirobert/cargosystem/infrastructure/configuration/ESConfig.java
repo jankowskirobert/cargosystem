@@ -20,30 +20,18 @@ import java.net.InetAddress;
 public class ESConfig {
     @Bean
     public Client client() throws Exception {
-try {
-    Settings esSettings = Settings.builder()
-            .put("client.transport.nodes_sampler_interval", "5s")
-            .put("client.transport.sniff", false)
-            .build();
-
-    TransportClient client = new PreBuiltTransportClient(esSettings);
-
-
-    return client.addTransportAddress(
-            new InetSocketTransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
-}catch (Exception ex){
-    log.error("EEEEEEEEEEEEEEEEE",ex);
-    return null;
-}
+        Settings esSettings = Settings.builder()
+                .put("client.transport.nodes_sampler_interval", "5s")
+                .put("client.transport.sniff", false)
+                .build();
+        TransportClient client = new PreBuiltTransportClient(esSettings);
+        return client.addTransportAddress(
+                new InetSocketTransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
     }
 
     @Bean
     public ElasticsearchOperations elasticsearchTemplate() throws Exception {
-        try {
-            return new ElasticsearchTemplate(client());
-        }catch (Exception ex) {
-            log.error("EEEEEEEEEEEEEEEEE",ex);
-            return null;
-        }
+        return new ElasticsearchTemplate(client());
+
     }
 }
