@@ -1,9 +1,6 @@
 language: java
 sudo: required
-
 dist: trusty
-env:
-  DOCKER_COMPOSE_VERSION: 1.21.2
 services:
    - docker
 cache:
@@ -16,9 +13,6 @@ branches:
   - /^r\d.*$/
 
 before_install:
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin/docker-compose
   - docker -v
 # Get latest install-jdk.sh script
   - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
