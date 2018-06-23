@@ -1,12 +1,11 @@
 package eu.jankowskirobert.cargosystem.shared;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
-@AllArgsConstructor(staticName = "of")
+@AllArgsConstructor(staticName = "of",access = AccessLevel.PUBLIC)
 @Getter
 @Builder
+@NoArgsConstructor
 public class Address {
 	private String street;
 	private String zipCode;
@@ -14,4 +13,5 @@ public class Address {
 	private String region;
 	private String country;
 	private Continent continent;
+
 }

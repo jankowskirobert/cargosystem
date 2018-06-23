@@ -27,14 +27,14 @@ public class CargoTest {
     @Autowired
     private LocationQueryRepository locationQueryRepository;
 
-    @Test
-    public void testSampleCargoRouting() {
-        Location sample1 = locationQueryRepository.find(LocationId.of("SAMPLE1"));
-        Location sample2 = locationQueryRepository.find(LocationId.of("SAMPLE2"));
-        TransitMovement first = TransitMovement.of(sample1, sample2, LocalDateTime.now(), LocalDateTime.now());
-        TransitMovement second = TransitMovement.of(sample2, sample1, LocalDateTime.now(), LocalDateTime.now());
-        Transit transit = Transit.of(TransitId.of("0123"), Schedule.of(first, second));
-        RouteSpecification routeSpecification = RouteSpecification.of(sample1, sample2, LocalDate.now());
-        Cargo cargo = Cargo.newEmpty(CargoId.of("Test1"), TransportNumber.random(), routeSpecification);
-    }
+//    @Test
+//    public void testSampleCargoRouting() {
+//        Location sample1 = locationQueryRepository.find(LocationId.of("SAMPLE1"));
+//        Location sample2 = locationQueryRepository.find(LocationId.of("SAMPLE2"));
+//        TransitMovement first = TransitMovement.of(sample1, sample2, LocalDateTime.now(), LocalDateTime.now());
+//        TransitMovement second = TransitMovement.of(sample2, sample1, LocalDateTime.now(), LocalDateTime.now());
+//        Transit transit = Transit.of(TransitId.of("0123"), Schedule.of(first, second));
+//        RouteSpecification routeSpecification = RouteSpecification.of(sample1, sample2, LocalDate.now());
+//        Cargo cargo = Cargo.newEmpty(CargoId.of("Test1"), TransportNumber.random(), routeSpecification);
+//    }
 }

@@ -3,6 +3,7 @@ package eu.jankowskirobert.cargosystem.application.location.register;
 import eu.jankowskirobert.cargosystem.composite.location.LocationQueryRepository;
 import eu.jankowskirobert.cargosystem.domain.cargo.*;
 import eu.jankowskirobert.cargosystem.domain.cargo.TransportNumber;
+import eu.jankowskirobert.cargosystem.domain.cargo.CargoRepositoryException;
 import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyId;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyRepository;
@@ -23,11 +24,6 @@ import java.util.stream.Collectors;
 public class TestConfiguration {
 
     private LocationDB locationDB = new LocationDB();
-
-    @Bean
-    public LocationQueryRepository locationQueryRepository() {
-        return locationDB;
-    }   
 
     @Bean
     public LocationWriteRepository locationWriteRepository() {

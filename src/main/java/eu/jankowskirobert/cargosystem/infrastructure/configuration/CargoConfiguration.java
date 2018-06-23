@@ -5,6 +5,8 @@ import eu.jankowskirobert.cargosystem.composite.cargo.CargoQueryRepository;
 import eu.jankowskirobert.cargosystem.composite.cargo.RegisterCargoCommandFactory;
 import eu.jankowskirobert.cargosystem.composite.location.LocationQueryRepository;
 import eu.jankowskirobert.cargosystem.domain.cargo.*;
+import eu.jankowskirobert.cargosystem.domain.cargo.CargoRepositoryException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +19,9 @@ import java.util.stream.Collectors;
 
 @Configuration
 public class CargoConfiguration {
+
+    @Autowired
+    LocationQueryRepository locationQueryRepository;
 
     @Bean
     public CargoRepository cargoRepository() {
@@ -47,22 +52,12 @@ public class CargoConfiguration {
     }
 
     @Bean
-    public CargoQueryRepository cargoQueryRepository(){
-        return new CargoQueryRepository() {
-            @Override
-            public TransportNumber nextTransportNumber() {
-                return TransportNumber.of(UUID.randomUUID().toString());
-            }
-        };
-    }
-
-    @Bean
     public RegisterCargoCommandHandler registerCargoCommandHandler(CargoRepository cargoRepository, ApplicationEventPublisher applicationEventPublisher){
         return RegisterCargoCommandHandler.of(cargoRepository, applicationEventPublisher);
     }
 
     @Bean
-    public RegisterCargoCommandFactory registerCargoCommandFactory(LocationQueryRepository locationQueryRepository, CargoQueryRepository cargoQueryRepository){
+    public RegisterCargoCommandFactory registerCargoCommandFactory(CargoQueryRepository cargoQueryRepository){
         return RegisterCargoCommandFactory.of(locationQueryRepository, cargoQueryRepository);
     }
 

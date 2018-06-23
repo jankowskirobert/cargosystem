@@ -2,7 +2,7 @@ package eu.jankowskirobert.cargosystem.infrastructure.http;
 
 import eu.jankowskirobert.cargosystem.application.location.LocationQuery;
 import eu.jankowskirobert.cargosystem.application.location.register.RegisterLocationCommandHandler;
-import eu.jankowskirobert.cargosystem.composite.location.LocationWithAssignedCompanyViewDTO;
+import eu.jankowskirobert.cargosystem.composite.location.LocationProjection;
 import eu.jankowskirobert.cargosystem.application.location.register.RegisterLocationCommand;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -24,12 +24,13 @@ public class LocationHttpApi {
 	}
 
 	@RequestMapping(value = "find", method = RequestMethod.GET)
-	public LocationWithAssignedCompanyViewDTO addNewLocation(final String id) {
-		return locationQuery.getPendingLocation(id);
+	public LocationProjection addNewLocation(final String id) {
+
+		return locationQuery.getPendingLocation(id).orElseThrow(() -> new NullPointerException());
 	}
 
 	@RequestMapping(value = "all", method = RequestMethod.GET)
-	public List<LocationWithAssignedCompanyViewDTO> addNewLocation() {
+	public Iterable<LocationProjection> addNewLocation() {
 		return locationQuery.getPendingLocations();
 	}
 }

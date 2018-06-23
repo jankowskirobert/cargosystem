@@ -13,10 +13,10 @@ import java.util.Set;
 @Getter
 public class Company {
 	private CompanyId companyId;
-
+	private String name;
 	private Set<Continent> available;
 
 	public static Company empty(){
-		return new Company(null, null);
+		return new Company(null, null, null);
 	}
 }

@@ -47,11 +47,8 @@ public class Delivery {
         this.lastLocation = routeSpecification.origin();
         this.routingStatus = RoutingStatus.NOT_ROUTED;
     }
-    /*
-        jesli obecne zdarzenie = zaladunek to nastepne powinno byc wyladunkiem
-        jesli obecne zdarzenie = wyladunek to nastepne powinno byc zaladunkiem lub odbiorem lub zwrotem
-        jesli obecne zdarzenie = odbior to nastepne moze byc zaladunkiem jesli jest w planie jeszcze jakas mozliwosc poruszania sie
-     */
+
+
     private HandlingActivity.Type[] predictNextEventTypes(HandlingActivity activity) {
         switch (activity.type()) {
             case LOAD: {

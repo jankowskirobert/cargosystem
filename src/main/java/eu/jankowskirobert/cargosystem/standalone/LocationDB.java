@@ -1,7 +1,7 @@
 package eu.jankowskirobert.cargosystem.standalone;
 
 import eu.jankowskirobert.cargosystem.composite.location.LocationQueryRepository;
-import eu.jankowskirobert.cargosystem.composite.location.LocationWithAssignedCompanyViewDTO;
+import eu.jankowskirobert.cargosystem.composite.location.LocationProjection;
 import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import eu.jankowskirobert.cargosystem.domain.location.LocationId;
@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class LocationDB implements LocationWriteRepository, LocationQueryRepository {
+public class LocationDB implements LocationWriteRepository {
 
 
     Address addressS1 = Address.of("SAMPLE1", "SAMPLE1", "SAMPLE1", "SAMPLE1", "SAMPLE1", Continent.EUROPE);
@@ -37,20 +37,5 @@ public class LocationDB implements LocationWriteRepository, LocationQueryReposit
         if (!location.add(newLocation)) throw new LocationRepositoryException();
     }
 
-    @Override
-    public Location find(LocationId id) {
-        return location.stream().filter(x -> x.getId().equals(id)).findFirst().orElse(null);
-    }
-
-
-    @Override
-    public LocationWithAssignedCompanyViewDTO findProjection(String id) {
-        return null;
-    }
-
-    @Override
-    public List<LocationWithAssignedCompanyViewDTO> findProjections() {
-        return null;
-    }
 
 }

@@ -1,12 +1,13 @@
 package eu.jankowskirobert.cargosystem.application.location;
 
-import eu.jankowskirobert.cargosystem.composite.location.LocationWithAssignedCompanyViewDTO;
+import eu.jankowskirobert.cargosystem.composite.location.LocationProjection;
 import eu.jankowskirobert.cargosystem.composite.location.LocationQueryRepository;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(staticName = "of")
@@ -14,10 +15,10 @@ public class LocationQuery {
 
     private LocationQueryRepository locationQueryRepository;
 
-    public LocationWithAssignedCompanyViewDTO getPendingLocation(String id) {
-        return locationQueryRepository.findProjection(id);
+    public Optional<LocationProjection> getPendingLocation(String id) {
+        return locationQueryRepository.findById(id);
     }
-    public List<LocationWithAssignedCompanyViewDTO> getPendingLocations() {
-        return locationQueryRepository.findProjections();
+    public Iterable<LocationProjection> getPendingLocations() {
+        return locationQueryRepository.findAll();
     }
 }
