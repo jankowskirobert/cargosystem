@@ -13,6 +13,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -24,7 +25,7 @@ import java.util.UUID;
 @ContextConfiguration(classes = {TestConfiguration.class})
 public class LocationHandlerTest {
 
-	@Autowired
+	@Mock
 	private LocationQueryRepository locationQueryRepository;
 	@Autowired
 	private LocationWriteRepository locationWriteRepository;
@@ -36,27 +37,27 @@ public class LocationHandlerTest {
 		registerLocationCommandHandler = RegisterLocationCommandHandler.of(locationWriteRepository, locationQueryRepository);
 	}
 	
-//	@Test
-//	public void shouldCreateNewLocation() {
-//		String id = UUID.randomUUID().toString();
-//		Company company = Company.empty();
-//		Address address = Address.of("", "", "", "", "", Continent.EUROPE);
-//        LocalDate now = LocalDate.now();
-//        RegisterLocationCommand command = RegisterLocationCommand.of(LocationId.of(id), address, company, now);
-//		registerLocationCommandHandler.handle(command);
-//		Location xxx = Location.of(LocationId.of(id),address, company, now);
-//        Assert.assertThat(locationQueryRepository.find(LocationId.of(id)), Matchers.equalTo(xxx));
-//	}
-//
-//    @Test(expected = LocationRepositoryException.class)
-//    public void shouldCreateNewLocation_secondStoreThrowException() {
-//        String id = UUID.randomUUID().toString();
-//        Company company = Company.empty();
-//        Address address = Address.of("", "", "", "", "", Continent.EUROPE);
-//        LocalDate now = LocalDate.now();
-//        RegisterLocationCommand command = RegisterLocationCommand.of(LocationId.of(id),address, company, now);
-//        registerLocationCommandHandler.handle(command);
-//        registerLocationCommandHandler.handle(command);
-//    }
+	@Test
+	public void shouldCreateNewLocation() {
+		String id = UUID.randomUUID().toString();
+		Company company = Company.empty();
+		Address address = Address.of("", "", "", "", "", Continent.EUROPE);
+        LocalDate now = LocalDate.now();
+        RegisterLocationCommand command = RegisterLocationCommand.of(LocationId.of(id), address, company, now);
+		registerLocationCommandHandler.handle(command);
+		Location xxx = Location.of(LocationId.of(id),address, company, now);
+//        Assert.assertThat(locationQueryRepository.findById(LocationId.of(id)), Matchers.equalTo(xxx));
+	}
+
+    @Test(expected = LocationRepositoryException.class)
+    public void shouldCreateNewLocation_secondStoreThrowException() {
+        String id = UUID.randomUUID().toString();
+        Company company = Company.empty();
+        Address address = Address.of("", "", "", "", "", Continent.EUROPE);
+        LocalDate now = LocalDate.now();
+        RegisterLocationCommand command = RegisterLocationCommand.of(LocationId.of(id),address, company, now);
+        registerLocationCommandHandler.handle(command);
+        registerLocationCommandHandler.handle(command);
+    }
 
 }
