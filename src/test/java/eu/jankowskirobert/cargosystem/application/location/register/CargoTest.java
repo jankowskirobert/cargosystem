@@ -5,11 +5,13 @@ import eu.jankowskirobert.cargosystem.domain.cargo.Cargo;
 import eu.jankowskirobert.cargosystem.domain.cargo.CargoId;
 import eu.jankowskirobert.cargosystem.domain.cargo.RouteSpecification;
 import eu.jankowskirobert.cargosystem.domain.cargo.TransportNumber;
+import eu.jankowskirobert.cargosystem.domain.cargo.delivery.DeliveryStatus;
 import eu.jankowskirobert.cargosystem.domain.cargo.transit.TransitMovement;
 import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import eu.jankowskirobert.cargosystem.domain.location.LocationId;
 import eu.jankowskirobert.cargosystem.shared.Address;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -69,6 +71,7 @@ public class CargoTest {
         RouteSpecification routeSpecification = RouteSpecification.of(sample1, sample2, LocalDate.now());
         Cargo cargo = Cargo.newEmpty(CargoId.of("Test1"), TransportNumber.random(), routeSpecification);
 
+        Assert.assertTrue(cargo.getDelivery().status().equals(DeliveryStatus.UNKNOWN));
 
     }
 }

@@ -21,7 +21,7 @@ public class HandlingActivity {
         /**
          *
          */
-        LOAD, UNLOAD, RECEIVE, CLAIM, REFUSAL, CHECK, UNKNOWN
+        LOAD, UNLOAD, RECEIVE, CLAIM, REFUSE, CHECK, UNKNOWN
 
     }
 
