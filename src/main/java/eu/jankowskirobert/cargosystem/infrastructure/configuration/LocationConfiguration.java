@@ -5,7 +5,7 @@ import eu.jankowskirobert.cargosystem.application.location.register.RegisterLoca
 import eu.jankowskirobert.cargosystem.composite.location.LocationProjection;
 import eu.jankowskirobert.cargosystem.composite.location.LocationQueryRepository;
 import eu.jankowskirobert.cargosystem.domain.location.LocationWriteRepository;
-import eu.jankowskirobert.cargosystem.standalone.LocationDB;
+import eu.jankowskirobert.cargosystem.infrastructure.InMemoryLocation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LocationConfiguration {
 
-    private LocationDB locationDB = new LocationDB();
+    private InMemoryLocation inMemoryLocation = new InMemoryLocation();
     @Autowired
     LocationQueryRepository locationQueryRepository;
     @Bean
@@ -29,6 +29,6 @@ public class LocationConfiguration {
 
     @Bean
     public LocationWriteRepository locationWriteRepository() {
-        return locationDB;
+        return inMemoryLocation;
     }
 }

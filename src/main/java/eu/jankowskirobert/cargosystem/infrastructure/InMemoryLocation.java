@@ -1,7 +1,5 @@
-package eu.jankowskirobert.cargosystem.standalone;
+package eu.jankowskirobert.cargosystem.infrastructure;
 
-import eu.jankowskirobert.cargosystem.composite.location.LocationQueryRepository;
-import eu.jankowskirobert.cargosystem.composite.location.LocationProjection;
 import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import eu.jankowskirobert.cargosystem.domain.location.LocationId;
@@ -12,10 +10,9 @@ import eu.jankowskirobert.cargosystem.shared.Continent;
 
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-public class LocationDB implements LocationWriteRepository {
+public class InMemoryLocation implements LocationWriteRepository {
 
 
     Address addressS1 = Address.of("SAMPLE1", "SAMPLE1", "SAMPLE1", "SAMPLE1", "SAMPLE1", Continent.EUROPE);

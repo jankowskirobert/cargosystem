@@ -26,10 +26,24 @@ public class RegisterCargoCommandFactory {
         Optional<LocationProjection> locationFrom = locationQueryRepository.findById(registerCargoDTO.locationFrom());
         Optional<LocationProjection> locationTo = locationQueryRepository.findById(registerCargoDTO.locationTo());
         if (locationFrom.isPresent() && locationTo.isPresent()) {
-            LocationProjection lF = locationFrom.orElseThrow(() -> new IllegalAccessError());
-            LocationProjection lT = locationTo.orElseThrow(()-> new IllegalAccessError());
-            Location mapperFrom = Location.of(LocationId.of(lF.getId()), lF.getAddress(), Company.of(CompanyId.of(lF.getCompanyId()), lF.getCompanyName(), null), lF.getAvailability());
-            Location mapperTo = Location.of(LocationId.of(lT.getId()), lT.getAddress(), Company.of(CompanyId.of(lT.getCompanyId()), lT.getCompanyName(), null), lT.getAvailability());
+            LocationProjection locationFromProjection = locationFrom.orElseThrow(() -> new IllegalAccessError());
+            LocationProjection locationToProjection = locationTo.orElseThrow(() -> new IllegalAccessError());
+            Location mapperFrom = Location.of(
+                    LocationId.of(locationFromProjection.getId()),
+                    locationFromProjection.getAddress(),
+                    Company.builder()
+                            .companyId(CompanyId.of(locationFromProjection.getCompanyId()))
+                            .name(locationFromProjection.getCompanyName())
+                            .build(),
+                    locationFromProjection.getAvailability());
+            Location mapperTo = Location.of(
+                    LocationId.of(locationToProjection.getId()),
+                    locationToProjection.getAddress(),
+                    Company.builder()
+                            .companyId(CompanyId.of(locationToProjection.getCompanyId()))
+                            .name(locationToProjection.getCompanyName())
+                            .build(),
+                    locationToProjection.getAvailability());
             return RegisterCargoCommand.of(transportNumber, registerCargoDTO.name(), mapperFrom, mapperTo, registerCargoDTO.arrival());
         } else
             return null;

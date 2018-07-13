@@ -41,7 +41,7 @@ public class Delivery {
             this.deliveryStatus = this.matchDeliveryStatus(event.activity());
             this.lastLocation = this.dispatchLocationFromEvent(event.activity());
             this.current = this.dispatchTransitFromEvent(event.activity());
-            this.nextActivityType = this.predictNextEventTypes(event.activity());
+            this.nextActivityType = this.nextPossibleAction(event.activity());
         }
         this.estimatedTimeOfArrival = this.estimate(itinerary);
         this.lastLocation = routeSpecification.origin();
@@ -49,7 +49,7 @@ public class Delivery {
     }
 
 
-    private HandlingActivity.Type[] predictNextEventTypes(HandlingActivity activity) {
+    private HandlingActivity.Type[] nextPossibleAction(HandlingActivity activity) {
         switch (activity.type()) {
             case LOAD: {
                 return new HandlingActivity.Type[]{HandlingActivity.Type.UNLOAD, HandlingActivity.Type.CHECK};

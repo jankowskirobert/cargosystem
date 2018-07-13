@@ -1,6 +1,5 @@
 package eu.jankowskirobert.cargosystem.application.location.register;
 
-import eu.jankowskirobert.cargosystem.composite.location.LocationQueryRepository;
 import eu.jankowskirobert.cargosystem.domain.cargo.*;
 import eu.jankowskirobert.cargosystem.domain.cargo.TransportNumber;
 import eu.jankowskirobert.cargosystem.domain.cargo.CargoRepositoryException;
@@ -13,7 +12,7 @@ import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompany;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompanyId;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompanyRepository;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompanyRepositoryException;
-import eu.jankowskirobert.cargosystem.standalone.LocationDB;
+import eu.jankowskirobert.cargosystem.infrastructure.InMemoryLocation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,11 +22,11 @@ import java.util.stream.Collectors;
 @Configuration
 public class TestConfiguration {
 
-    private LocationDB locationDB = new LocationDB();
+    private InMemoryLocation inMemoryLocation = new InMemoryLocation();
 
     @Bean
     public LocationWriteRepository locationWriteRepository() {
-        return locationDB;
+        return inMemoryLocation;
     }
 
     @Bean

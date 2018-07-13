@@ -18,7 +18,10 @@ public class HandlingActivity {
     private Location location;
 
     public enum Type {
-        LOAD, UNLOAD, RECEIVE, CLAIM, CHECK, UNKNOWN
+        /**
+         *
+         */
+        LOAD, UNLOAD, RECEIVE, CLAIM, REFUSAL, CHECK, UNKNOWN
 
     }
 
