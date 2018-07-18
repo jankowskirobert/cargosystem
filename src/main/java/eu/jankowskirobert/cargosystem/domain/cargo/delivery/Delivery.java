@@ -5,6 +5,7 @@ import eu.jankowskirobert.cargosystem.domain.cargo.RouteSpecification;
 import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingActivity;
 import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingEvent;
 import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingHistory;
+import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingType;
 import eu.jankowskirobert.cargosystem.domain.cargo.transit.Transit;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import lombok.AccessLevel;
@@ -53,23 +54,17 @@ public class Delivery {
     }
 
 
-    private HandlingActivity.Type[] nextPossibleAction(HandlingActivity activity) {
+    private HandlingType nextPossibleAction(HandlingActivity activity) {
         if (!Objects.isNull(activity))
             switch (activity.type()) {
                 case LOAD: {
-                    return new HandlingActivity.Type[]{HandlingActivity.Type.UNLOAD, HandlingActivity.Type.CHECK};
-                }
-                case UNLOAD: {
-                    return new HandlingActivity.Type[]{HandlingActivity.Type.UNLOAD, HandlingActivity.Type.CHECK};
-                }
-                case RECEIVE: {
-                    return new HandlingActivity.Type[]{HandlingActivity.Type.CHECK, HandlingActivity.Type.LOAD, HandlingActivity.Type.CLAIM};
+                    return HandlingType.UNLOAD;
                 }
                 default:
-                    return new HandlingActivity.Type[]{HandlingActivity.Type.UNKNOWN};
+                    return HandlingType.UNKNOWN;
             }
         else
-            return new HandlingActivity.Type[]{};
+            return HandlingType.UNKNOWN;
     }
 
     private LocalDateTime estimate(Itinerary itinerary) {

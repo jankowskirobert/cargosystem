@@ -18,18 +18,14 @@ before_install:
   - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
 # https://github.com/travis-ci/travis-ci/issues/8408
   - unset _JAVA_OPTIONS
+  
+jdk:
+  - oraclejdk8
+  - oraclejdk10
+  - oraclejdk-ea
+  - openjdk10
+  - openjdk11
 
-matrix:
-  include:
-# Java 10 "Oracle JDK" (not yet provided by Travis CI)
-    - env: JDK='Oracle JDK 10' INSTALL='publishToMavenLocal'
-      install: . ./install-jdk.sh -F 10 -L BCL
-# Java 10 "OpenJDK"
-    - env: JDK='OpenJDK 10' JACOCO='-PenableJaCoCo'
-      install: . ./install-jdk.sh -F 10 -L GPL
-# Java 11 "Oracle JDK"
-    - env: JDK='Oracle JDK 11'
-      install: . ./install-jdk.sh -F 11 -L BCL
 script:
   - docker-compose -f docker-compose.yml up -d
   - docker-compose -f docker-compose.yml ps
