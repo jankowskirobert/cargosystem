@@ -58,7 +58,7 @@ public class CargoConfiguration {
 
     @Bean
     public RegisterCargoCommandFactory registerCargoCommandFactory(CargoQueryRepository cargoQueryRepository){
-        return RegisterCargoCommandFactory.of(locationQueryRepository, cargoQueryRepository);
+        return RegisterCargoCommandFactory.of(locationQueryRepository);
     }
 
 }
