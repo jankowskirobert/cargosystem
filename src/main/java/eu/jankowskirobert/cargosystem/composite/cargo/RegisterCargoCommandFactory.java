@@ -19,7 +19,6 @@ import java.util.Optional;
 public class RegisterCargoCommandFactory {
 
     private LocationQueryRepository locationQueryRepository;
-    private CargoQueryRepository cargoQueryRepository;
 
     public RegisterCargoCommand cargo(RegisterCargoDTO registerCargoDTO) {
         TransportNumber transportNumber = TransportNumber.random();
@@ -46,7 +45,7 @@ public class RegisterCargoCommandFactory {
                     locationToProjection.getAvailability());
             return RegisterCargoCommand.of(transportNumber, registerCargoDTO.name(), mapperFrom, mapperTo, registerCargoDTO.arrival());
         } else
-            return null;
+            throw new CommandFactoryException();
     }
 }
 

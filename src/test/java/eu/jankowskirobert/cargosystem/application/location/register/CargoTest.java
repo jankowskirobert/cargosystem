@@ -38,14 +38,7 @@ public class CargoTest {
 
     @Test
     public void testSampleCargoRouting() {
-        Company company = Company.empty();
-        Location sample1 = Location.of(LocationId.of("SAMPLE1"), addressS1, company, LocalDate.now());
-        Location sample2 = Location.of(LocationId.of("SAMPLE2"), addressS2, company, LocalDate.now());
-        TransitMovement first = TransitMovement.of(sample1, sample2, LocalDateTime.now(), LocalDateTime.now());
-        TransitMovement second = TransitMovement.of(sample2, sample1, LocalDateTime.now(), LocalDateTime.now());
-
-        RouteSpecification routeSpecification = RouteSpecification.of(sample1, sample2, LocalDate.now());
-        Cargo cargo = Cargo.newEmpty(CargoId.of("Test1"), TransportNumber.random(), routeSpecification);
+        Cargo cargo = prepareNewCargoFromGermanyToEngland("ID", "TN1");
     }
 
     @Test
@@ -73,5 +66,17 @@ public class CargoTest {
 
         Assert.assertTrue(cargo.getDelivery().status().equals(DeliveryStatus.UNKNOWN));
 
+    }
+
+    private Cargo prepareNewCargoFromGermanyToEngland(String id, String number) {
+        CargoId cargoId = CargoId.of(id);
+        Company company = Company.empty();
+        TransportNumber transportNumber = TransportNumber.of(number);
+        Address addressS1 = Address.builder().country("GERMANY").build();
+        Address addressS2 = Address.builder().country("ENGLAND").build();
+        Location sample1 = Location.of(LocationId.of("SAMPLE1"), addressS1, company, LocalDate.now());
+        Location sample2 = Location.of(LocationId.of("SAMPLE2"), addressS2, company, LocalDate.now());
+        RouteSpecification routeSpecification = RouteSpecification.of(sample1, sample2, LocalDate.now());
+        return Cargo.newEmpty(cargoId, transportNumber, routeSpecification);
     }
 }

@@ -3,6 +3,7 @@ package eu.jankowskirobert.cargosystem.domain.cargo.delivery;
 import eu.jankowskirobert.cargosystem.domain.cargo.Itinerary;
 import eu.jankowskirobert.cargosystem.domain.cargo.RouteSpecification;
 import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingActivity;
+import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingEvent;
 import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingHistory;
 import eu.jankowskirobert.cargosystem.domain.cargo.transit.Transit;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
@@ -29,9 +30,9 @@ public class Delivery {
     private LocalDateTime estimatedTimeOfArrival;
     private HandlingActivity.Type[] nextActivityType;
     private RoutingStatus routingStatus;
-    private HandlingActivity handlingEvent;
+    private HandlingEvent handlingEvent;
 
-    public static Delivery of(HandlingActivity event, RouteSpecification routeSpecification, Itinerary itinerary) {
+    public static Delivery of(HandlingEvent event, RouteSpecification routeSpecification, Itinerary itinerary) {
         return new Delivery(event, routeSpecification, itinerary);
     }
 
@@ -40,7 +41,7 @@ public class Delivery {
         return new Delivery(last, routeSpecification, itinerary);
     }
 
-    private Delivery(HandlingActivity event, RouteSpecification routeSpecification, Itinerary itinerary) {
+    private Delivery(HandlingEvent event, RouteSpecification routeSpecification, Itinerary itinerary) {
         this.handlingEvent = event;
         this.status = this.matchDeliveryStatus(event);
         this.lastLocation = this.dispatchLocationFromEvent(event);

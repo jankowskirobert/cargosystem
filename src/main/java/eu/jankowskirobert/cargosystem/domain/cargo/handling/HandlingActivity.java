@@ -1,6 +1,5 @@
 package eu.jankowskirobert.cargosystem.domain.cargo.handling;
 
-import eu.jankowskirobert.cargosystem.domain.cargo.transit.Transit;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,16 +12,6 @@ import lombok.experimental.Accessors;
 @Accessors(fluent = true)
 @Getter
 public class HandlingActivity {
-    private Type type;
-    private Transit transit;
+    private HandlingType type;
     private Location location;
-
-    public enum Type {
-        /**
-         *
-         */
-        LOAD, UNLOAD, RECEIVE, CLAIM, REFUSE, CHECK, UNKNOWN
-
-    }
-
 }

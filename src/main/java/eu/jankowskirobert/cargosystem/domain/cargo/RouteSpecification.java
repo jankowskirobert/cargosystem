@@ -12,8 +12,8 @@ import java.time.LocalDate;
 @Accessors(fluent = true)
 @AllArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
 public class RouteSpecification {
-    @Getter()
     private Location origin;
     private Location destination;
     private LocalDate arrivalDeadline;
