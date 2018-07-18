@@ -21,7 +21,6 @@ repositories {
 dependencies {
     compile files('libs/lombok.jar')
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.0.1.RELEASE'
-    compile group: 'eu.jankowskirobert', name: 'cqrs', version:'0.0.1-SNAPSHOT'
     compile group: 'org.hibernate.validator', name: 'hibernate-validator', version:'6.0.2.Final'
     compile group: 'org.hibernate.validator', name: 'hibernate-validator-annotation-processor', version:'6.0.2.Final'
     testCompile group: 'junit', name: 'junit', version:'4.12'
