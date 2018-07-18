@@ -18,7 +18,7 @@ public class HandlingHistory {
         return new HandlingHistory();
     }
 
-    public HandlingActivity getLastActivity() {
+    public HandlingEvent getLastActivity() {
         return null;
     }
 }

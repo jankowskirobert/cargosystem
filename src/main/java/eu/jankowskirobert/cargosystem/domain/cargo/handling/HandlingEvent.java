@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Getter
 public class HandlingEvent {
     private HandlingEventId id;
-    private HandlingType activity;
+    private HandlingType type;
     private LocalDateTime eventRegistration;
     private LocalDateTime eventCompetition;
     private Cargo cargo;

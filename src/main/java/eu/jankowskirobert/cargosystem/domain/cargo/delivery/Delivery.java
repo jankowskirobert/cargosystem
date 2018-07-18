@@ -2,7 +2,6 @@ package eu.jankowskirobert.cargosystem.domain.cargo.delivery;
 
 import eu.jankowskirobert.cargosystem.domain.cargo.Itinerary;
 import eu.jankowskirobert.cargosystem.domain.cargo.RouteSpecification;
-import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingActivity;
 import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingEvent;
 import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingHistory;
 import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingType;
@@ -29,7 +28,7 @@ public class Delivery {
     private Location lastLocation;
     private Transit current;
     private LocalDateTime estimatedTimeOfArrival;
-    private HandlingActivity.Type[] nextActivityType;
+    private HandlingType nextActivityType;
     private RoutingStatus routingStatus;
     private HandlingEvent handlingEvent;
 
@@ -38,7 +37,7 @@ public class Delivery {
     }
 
     public static Delivery of(RouteSpecification routeSpecification, Itinerary itinerary, HandlingHistory history) {
-        HandlingActivity last = history.getLastActivity();
+        HandlingEvent last = history.getLastActivity();
         return new Delivery(last, routeSpecification, itinerary);
     }
 
@@ -54,7 +53,7 @@ public class Delivery {
     }
 
 
-    private HandlingType nextPossibleAction(HandlingActivity activity) {
+    private HandlingType nextPossibleAction(HandlingEvent activity) {
         if (!Objects.isNull(activity))
             switch (activity.type()) {
                 case LOAD: {
@@ -71,19 +70,19 @@ public class Delivery {
         return itinerary.getFinalArrival();
     }
 
-    private Transit dispatchTransitFromEvent(HandlingActivity activity) {
+    private Transit dispatchTransitFromEvent(HandlingEvent activity) {
         if (!Objects.isNull(activity))
             return activity.transit();
         return null;
     }
 
-    private Location dispatchLocationFromEvent(HandlingActivity activity) {
+    private Location dispatchLocationFromEvent(HandlingEvent activity) {
         if (!Objects.isNull(activity))
             return activity.location();
         return null;
     }
 
-    private DeliveryStatus matchDeliveryStatus(HandlingActivity activity) {
+    private DeliveryStatus matchDeliveryStatus(HandlingEvent activity) {
         if (!Objects.isNull(activity))
             switch (activity.type()) {
                 case LOAD:
