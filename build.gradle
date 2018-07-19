@@ -11,12 +11,9 @@ compileJava {
     options.failOnError = false
 }
 
-targetCompatibility = 1.8
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
-
-
 
 repositories {
     mavenCentral()

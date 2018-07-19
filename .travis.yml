@@ -10,6 +10,12 @@ cache:
 
 before_install:
   - docker -v
+# https://github.com/travis-ci/travis-ci/issues/8408
+# Also interferes with platform-tooling-support-tests expectations
+  - unset _JAVA_OPTIONS
+
+install:
+  - echo "Don't let Travis CI execute './gradlew assemble' by default"
 
 jdk:
   - openjdk8
@@ -17,6 +23,4 @@ jdk:
   - openjdk11
 
 script:
-  - docker-compose -f docker-compose.yml up -d
-  - docker-compose -f docker-compose.yml ps
-  - mvn -nsu clean verify compile install
+  - ./gradlew build --scan -s
