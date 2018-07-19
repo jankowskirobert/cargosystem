@@ -7,26 +7,16 @@ cache:
   directories:
   - $HOME/.m2
   - $HOME/.m2/repository
-# Specify which branches/tags that we do not want to be built: r5.0.0-M5
-branches:
-  except:
-  - /^r\d.*$/
 
 before_install:
   - docker -v
-# Get latest install-jdk.sh script
-  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
-# https://github.com/travis-ci/travis-ci/issues/8408
-  - unset _JAVA_OPTIONS
 
 jdk:
-  - oraclejdk8
-  - oraclejdk10
-  - oraclejdk-ea
+  - openjdk8
   - openjdk10
   - openjdk11
 
 script:
   - docker-compose -f docker-compose.yml up -d
   - docker-compose -f docker-compose.yml ps
-  - mvn -Dmaven.repo.local=$HOME/.m2/repository -nsu clean verify compile install
+  - mvn -nsu clean verify compile install
