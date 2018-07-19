@@ -18,7 +18,8 @@ install:
   - echo "Don't let Travis CI execute './gradlew assemble' by default"
 
 jdk:
-  - openjdk8
+  - oraclejdk8
+  - oraclejdk9
   - openjdk10
   - openjdk11
 
