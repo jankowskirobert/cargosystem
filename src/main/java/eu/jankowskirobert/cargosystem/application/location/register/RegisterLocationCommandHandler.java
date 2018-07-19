@@ -7,13 +7,6 @@ import eu.jankowskirobert.cargosystem.domain.location.LocationId;
 import eu.jankowskirobert.cargosystem.domain.location.LocationWriteRepository;
 import eu.jankowskirobert.cargosystem.infrastructure.cqrs.CommandHandler;
 import lombok.AllArgsConstructor;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
-
-import java.util.Optional;
 
 @AllArgsConstructor(staticName = "of")
 public class RegisterLocationCommandHandler implements CommandHandler<RegisterLocationCommand, Void> {

@@ -19,7 +19,7 @@ public class SpringAMQPConfig {
     public static final String routingKey = "he";
 
     @Bean
-    private Queue queue() {
+    Queue queue() {
         return new Queue(handlingQueue, false);
     }
 
