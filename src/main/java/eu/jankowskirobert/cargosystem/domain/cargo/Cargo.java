@@ -11,7 +11,7 @@ import lombok.*;
 @EqualsAndHashCode(of = "id")
 public class Cargo {
 
-    private CargoId id;
+    private CargoId cargoId;
     private TransportNumber transportNumber;
     private Location placeOfIssue;
     private RouteSpecification routeSpecification;

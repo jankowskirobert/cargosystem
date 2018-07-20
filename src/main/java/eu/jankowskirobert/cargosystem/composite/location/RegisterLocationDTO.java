@@ -1,4 +1,4 @@
-package eu.jankowskirobert.cargosystem.application.location.register;
+package eu.jankowskirobert.cargosystem.composite.location;
 
 import eu.jankowskirobert.cargosystem.shared.Address;
 import lombok.Getter;

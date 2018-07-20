@@ -5,11 +5,9 @@ import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import eu.jankowskirobert.cargosystem.domain.location.LocationId;
 import eu.jankowskirobert.cargosystem.domain.location.LocationRepositoryException;
-import eu.jankowskirobert.cargosystem.domain.location.LocationWriteRepository;
+import eu.jankowskirobert.cargosystem.domain.location.LocationRepository;
 import eu.jankowskirobert.cargosystem.shared.Address;
 import eu.jankowskirobert.cargosystem.shared.Continent;
-import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,13 +26,13 @@ public class LocationHandlerTest {
 	@Mock
 	private LocationQueryRepository locationQueryRepository;
 	@Autowired
-	private LocationWriteRepository locationWriteRepository;
+	private LocationRepository locationRepository;
 
 	private RegisterLocationCommandHandler registerLocationCommandHandler;
     private final String companyId = "001";
 	@Before
 	public void setUp() {
-		registerLocationCommandHandler = RegisterLocationCommandHandler.of(locationWriteRepository, locationQueryRepository);
+		registerLocationCommandHandler = RegisterLocationCommandHandler.of(locationRepository, locationQueryRepository);
 	}
 	
 	@Test

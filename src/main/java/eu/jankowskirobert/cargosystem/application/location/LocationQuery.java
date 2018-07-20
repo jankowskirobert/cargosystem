@@ -7,7 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.util.Optional;
-
+/*
+    Adapter
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(staticName = "of")
 public class LocationQuery {

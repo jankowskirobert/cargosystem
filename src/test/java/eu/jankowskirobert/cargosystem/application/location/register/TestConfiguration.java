@@ -7,7 +7,7 @@ import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyId;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyRepository;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyRepositoryException;
-import eu.jankowskirobert.cargosystem.domain.location.LocationWriteRepository;
+import eu.jankowskirobert.cargosystem.domain.location.LocationRepository;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompany;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompanyId;
 import eu.jankowskirobert.cargosystem.domain.transportcompany.TransportCompanyRepository;
@@ -25,7 +25,7 @@ public class TestConfiguration {
     private InMemoryLocation inMemoryLocation = new InMemoryLocation();
 
     @Bean
-    public LocationWriteRepository locationWriteRepository() {
+    public LocationRepository locationWriteRepository() {
         return inMemoryLocation;
     }
 
