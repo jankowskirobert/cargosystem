@@ -10,6 +10,7 @@ import eu.jankowskirobert.cargosystem.shared.Continent;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class InMemoryLocation implements LocationRepository {
@@ -32,6 +33,11 @@ public class InMemoryLocation implements LocationRepository {
     @Override
     public void store(Location newLocation) {
         if (!location.add(newLocation)) throw new LocationRepositoryException();
+    }
+
+    @Override
+    public Optional<Location> find(LocationId locationId) {
+        return Optional.empty();
     }
 
 

@@ -1,8 +1,7 @@
 package eu.jankowskirobert.cargosystem.application.location.register;
 
-import eu.jankowskirobert.cargosystem.domain.cargo.*;
-import eu.jankowskirobert.cargosystem.domain.cargo.TransportNumber;
-import eu.jankowskirobert.cargosystem.domain.cargo.CargoRepositoryException;
+import eu.jankowskirobert.cargosystem.domain.cargo.CargoRepository;
+import eu.jankowskirobert.cargosystem.domain.cargo.InMemoryCargo;
 import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyId;
 import eu.jankowskirobert.cargosystem.domain.company.CompanyRepository;
@@ -16,8 +15,8 @@ import eu.jankowskirobert.cargosystem.infrastructure.InMemoryLocation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.Set;
 
 @Configuration
 public class TestConfiguration {
@@ -48,30 +47,7 @@ public class TestConfiguration {
 
     @Bean
     public CargoRepository cargoRepository() {
-        return new CargoRepository() {
-
-            Set<Cargo> cargos = new HashSet<>();
-
-            @Override
-            public void store(Cargo cargo) {
-                if (!cargos.add(cargo)) throw new CargoRepositoryException();
-            }
-
-            @Override
-            public CargoId nextCargoId() {
-                return CargoId.of(UUID.randomUUID().toString());
-            }
-
-            @Override
-            public List<Cargo> findAll(TransportNumber id) {
-                return cargos.stream().filter(x -> x.getTransportNumber().equals(id)).collect(Collectors.toList());
-            }
-
-            @Override
-            public Cargo findFirst(TransportNumber id) {
-                return cargos.stream().filter(x -> x.getTransportNumber().equals(id)).findFirst().orElse(null);
-            }
-        };
+        return new InMemoryCargo();
     }
 
     @Bean
