@@ -6,6 +6,7 @@ import eu.jankowskirobert.cargosystem.composite.location.LocationProjection;
 import eu.jankowskirobert.cargosystem.composite.location.LocationQueryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,11 @@ public class LocationHttpApi implements LocationApi {
 
     private final RegisterLocationCommandHandler registerLocationCommandHandler;
     private final LocationQueryRepository locationQueryRepository;
+
+    @ExceptionHandler(value = IllegalArgumentException.class)
+    public ResponseEntity<QueryErrorResponse> handleException(IllegalArgumentException e){
+        return ResponseEntity.badRequest().body(QueryErrorResponse.with(e.getMessage()));
+    }
 
     @Override
     @RequestMapping(value = "register", method = RequestMethod.POST)
