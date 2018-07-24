@@ -1,35 +1,38 @@
 package eu.jankowskirobert.cargosystem.infrastructure.http;
 
-import eu.jankowskirobert.cargosystem.application.location.LocationQuery;
+import eu.jankowskirobert.cargosystem.application.location.register.RegisterLocationCommand;
 import eu.jankowskirobert.cargosystem.application.location.register.RegisterLocationCommandHandler;
 import eu.jankowskirobert.cargosystem.composite.location.LocationProjection;
-import eu.jankowskirobert.cargosystem.application.location.register.RegisterLocationCommand;
+import eu.jankowskirobert.cargosystem.composite.location.LocationQueryRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor(staticName = "of")
 @RestController
 @RequestMapping(value = "/location")
-public class LocationHttpApi {
-	
-	private final RegisterLocationCommandHandler registerLocationCommandHandler;
-	private final LocationQuery locationQuery;
-	
-	@RequestMapping(value = "register", method = RequestMethod.POST)
-	public void addNewLocation(@Valid final RegisterLocationCommand registerLocationCommand) {
-		registerLocationCommandHandler.handle(registerLocationCommand);
-	}
+public class LocationHttpApi implements LocationApi {
 
-	@RequestMapping(value = "find", method = RequestMethod.GET)
-	public LocationProjection addNewLocation(final String id) {
+    private final RegisterLocationCommandHandler registerLocationCommandHandler;
+    private final LocationQueryRepository locationQueryRepository;
 
-		return locationQuery.getPendingLocation(id).orElseThrow(() -> new NullPointerException());
-	}
+    @Override
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    public void addNewLocation(final RegisterLocationCommand registerLocationCommand) {
+        registerLocationCommandHandler.handle(registerLocationCommand);
+    }
 
-	@RequestMapping(value = "all", method = RequestMethod.GET)
-	public Iterable<LocationProjection> addNewLocation() {
-		return locationQuery.getPendingLocations();
-	}
+    @Override
+    @RequestMapping(value = "find", method = RequestMethod.GET)
+    public ResponseEntity<LocationProjection> getSingleLocationById(final String id) {
+        return ResponseEntity.ok(locationQueryRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Location not found")));
+    }
+
+    @Override
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<LocationProjection>> findAll() {
+        return ResponseEntity.ok(locationQueryRepository.findAll());
+    }
 }
