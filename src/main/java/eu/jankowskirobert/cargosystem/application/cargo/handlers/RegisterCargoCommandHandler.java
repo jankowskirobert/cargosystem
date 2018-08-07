@@ -8,7 +8,18 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
-
+/*
+TODO: [bsc info] remove
+This command handler represents behaviour behind cargo registration:
+1. Generate cargo id,
+2. Set up route specification
+3. Set up empty itinerary
+4. build basic cargo domain object with empty history and transit schedule
+5. Save domain object, produce event to add cargo to query node as projection (not business event, just internal)
+ */
+/**
+ *
+ */
 @AllArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RegisterCargoCommandHandler implements CommandHandler<RegisterCargoCommand, Void> {

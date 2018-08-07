@@ -4,15 +4,16 @@ import eu.jankowskirobert.cargosystem.domain.company.Company;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import eu.jankowskirobert.cargosystem.domain.location.LocationId;
 import eu.jankowskirobert.cargosystem.domain.location.LocationRepositoryException;
-import eu.jankowskirobert.cargosystem.domain.location.LocationWriteRepository;
+import eu.jankowskirobert.cargosystem.domain.location.LocationRepository;
 import eu.jankowskirobert.cargosystem.shared.Address;
 import eu.jankowskirobert.cargosystem.shared.Continent;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
-public class InMemoryLocation implements LocationWriteRepository {
+public class InMemoryLocation implements LocationRepository {
 
 
     Address addressS1 = Address.of("SAMPLE1", "SAMPLE1", "SAMPLE1", "SAMPLE1", "SAMPLE1", Continent.EUROPE);
@@ -32,6 +33,11 @@ public class InMemoryLocation implements LocationWriteRepository {
     @Override
     public void store(Location newLocation) {
         if (!location.add(newLocation)) throw new LocationRepositoryException();
+    }
+
+    @Override
+    public Optional<Location> find(LocationId locationId) {
+        return Optional.empty();
     }
 
 

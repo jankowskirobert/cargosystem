@@ -2,8 +2,9 @@ package eu.jankowskirobert.cargosystem.domain.cargo.delivery;
 
 import eu.jankowskirobert.cargosystem.domain.cargo.Itinerary;
 import eu.jankowskirobert.cargosystem.domain.cargo.RouteSpecification;
-import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingActivity;
+import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingEvent;
 import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingHistory;
+import eu.jankowskirobert.cargosystem.domain.cargo.handling.HandlingType;
 import eu.jankowskirobert.cargosystem.domain.cargo.transit.Transit;
 import eu.jankowskirobert.cargosystem.domain.location.Location;
 import lombok.AccessLevel;
@@ -27,20 +28,20 @@ public class Delivery {
     private Location lastLocation;
     private Transit current;
     private LocalDateTime estimatedTimeOfArrival;
-    private HandlingActivity.Type[] nextActivityType;
+    private HandlingType nextActivityType;
     private RoutingStatus routingStatus;
-    private HandlingActivity handlingEvent;
+    private HandlingEvent handlingEvent;
 
-    public static Delivery of(HandlingActivity event, RouteSpecification routeSpecification, Itinerary itinerary) {
+    public static Delivery of(HandlingEvent event, RouteSpecification routeSpecification, Itinerary itinerary) {
         return new Delivery(event, routeSpecification, itinerary);
     }
 
     public static Delivery of(RouteSpecification routeSpecification, Itinerary itinerary, HandlingHistory history) {
-        HandlingActivity last = history.getLastActivity();
+        HandlingEvent last = history.getLastActivity();
         return new Delivery(last, routeSpecification, itinerary);
     }
 
-    private Delivery(HandlingActivity event, RouteSpecification routeSpecification, Itinerary itinerary) {
+    private Delivery(HandlingEvent event, RouteSpecification routeSpecification, Itinerary itinerary) {
         this.handlingEvent = event;
         this.status = this.matchDeliveryStatus(event);
         this.lastLocation = this.dispatchLocationFromEvent(event);
@@ -52,42 +53,36 @@ public class Delivery {
     }
 
 
-    private HandlingActivity.Type[] nextPossibleAction(HandlingActivity activity) {
+    private HandlingType nextPossibleAction(HandlingEvent activity) {
         if (!Objects.isNull(activity))
             switch (activity.type()) {
                 case LOAD: {
-                    return new HandlingActivity.Type[]{HandlingActivity.Type.UNLOAD, HandlingActivity.Type.CHECK};
-                }
-                case UNLOAD: {
-                    return new HandlingActivity.Type[]{HandlingActivity.Type.UNLOAD, HandlingActivity.Type.CHECK};
-                }
-                case RECEIVE: {
-                    return new HandlingActivity.Type[]{HandlingActivity.Type.CHECK, HandlingActivity.Type.LOAD, HandlingActivity.Type.CLAIM};
+                    return HandlingType.UNLOAD;
                 }
                 default:
-                    return new HandlingActivity.Type[]{HandlingActivity.Type.UNKNOWN};
+                    return HandlingType.UNKNOWN;
             }
         else
-            return new HandlingActivity.Type[]{};
+            return HandlingType.UNKNOWN;
     }
 
     private LocalDateTime estimate(Itinerary itinerary) {
         return itinerary.getFinalArrival();
     }
 
-    private Transit dispatchTransitFromEvent(HandlingActivity activity) {
+    private Transit dispatchTransitFromEvent(HandlingEvent activity) {
         if (!Objects.isNull(activity))
             return activity.transit();
         return null;
     }
 
-    private Location dispatchLocationFromEvent(HandlingActivity activity) {
+    private Location dispatchLocationFromEvent(HandlingEvent activity) {
         if (!Objects.isNull(activity))
             return activity.location();
         return null;
     }
 
-    private DeliveryStatus matchDeliveryStatus(HandlingActivity activity) {
+    private DeliveryStatus matchDeliveryStatus(HandlingEvent activity) {
         if (!Objects.isNull(activity))
             switch (activity.type()) {
                 case LOAD:

@@ -1,12 +1,9 @@
 package eu.jankowskirobert.cargosystem.standalone;
 
-import eu.jankowskirobert.cargosystem.composite.location.LocationQueryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
-
 
 @EnableElasticsearchRepositories(basePackages = {"eu.jankowskirobert.cargosystem.composite.location","eu.jankowskirobert.cargosystem.composite.cargo"})
 @SpringBootApplication
